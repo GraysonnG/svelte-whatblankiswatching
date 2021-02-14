@@ -43,6 +43,7 @@ export const sort = async () => {
       if (isBefore(bStartDate, aStartDate)) return -1;
       return 0; // fuck you safari
     })
+    state.loading = false
     return state
   })
 

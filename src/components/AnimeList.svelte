@@ -11,7 +11,7 @@
 
   let filteredList: AnimeInfo[];
 
-  const unsub = animeStore.subscribe((state) => {
+  const _ = animeStore.subscribe((state) => {
     filteredList = state.list
       .filter((info) => filterTitle(info, state.filters.text))
       .filter((info) => filterCurrent(info, state.filters.current))
@@ -21,9 +21,11 @@
 </script>
 
 <div>
-  {#each filteredList as anime}
-    <Anime data={anime} />
-  {/each}
+  {#if !$animeStore.loading}
+    {#each filteredList as anime}
+      <Anime data={anime} />
+    {/each}
+  {/if}
 </div>
 
 <style>
@@ -35,5 +37,29 @@
     gap: 1em;
     box-sizing: border-box;
     padding: 1em 0;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    div {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    div {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    div {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    div {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

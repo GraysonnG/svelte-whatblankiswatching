@@ -10,10 +10,12 @@ export interface Filters {
 
 export interface AnimeStore {
   list: AnimeInfo[];
-  filters: Filters
+  filters: Filters;
+  loading: boolean;
 }
 
 export const animeStore = writable({
+  loading: true,
   list: [],
   filters: {
     text: "",

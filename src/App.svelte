@@ -19,7 +19,8 @@
 
 <style>
   main {
-    max-width: 1400px;
+    width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
   }
 </style>
