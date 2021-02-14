@@ -3,7 +3,7 @@
   import AnimeList from "./components/AnimeList.svelte";
   import Controls from "./components/Controls.svelte";
   import { init, sort } from "./store/actions/animeActions";
-  import Global from "./styles/global.svelte";
+  import GlobalStyles from "./styles/globalstyles.svelte";
 
   onMount(async () => {
     await init();
@@ -12,7 +12,7 @@
 </script>
 
 <main>
-  <Global />
+  <GlobalStyles />
   <Controls />
   <AnimeList />
 </main>
