@@ -1,16 +1,10 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
-  import { getUniqueYears } from "../utils/datehelper";
-  import { getUniqueSeasons } from "../utils/seasonhelper";
 
-  let years;
-  let seasons;
   let disableSeason;
 
   // this is ugly
   const _ = animeStore.subscribe((it) => {
-    years = getUniqueYears(it.list);
-    seasons = getUniqueSeasons(it.list);
     disableSeason = it.filters.year === "";
     if (disableSeason) it.filters.season = "";
   });
@@ -26,7 +20,7 @@
 
   <select bind:value={$animeStore.filters.year} id="year">
     <option value="">Select Year...</option>
-    {#each years as year}
+    {#each $animeStore.years as year}
       <option value={year}>{year}</option>
     {/each}
   </select>
@@ -37,7 +31,7 @@
     id="season"
   >
     <option value="">Select Season...</option>
-    {#each seasons as season}
+    {#each $animeStore.seasons as season}
       <option value={season}>{season}</option>
     {/each}
   </select>

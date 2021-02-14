@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { AnimeInfo } from '../types/kitsuResponse';
+import type { AnimeInfo, Season } from '../types/kitsuResponse';
 
 export interface Filters {
   text: string;
@@ -12,6 +12,8 @@ export interface AnimeStore {
   list: AnimeInfo[];
   filters: Filters;
   loading: boolean;
+  years: number[];
+  seasons: Season[];
 }
 
 export const animeStore = writable({
@@ -22,5 +24,7 @@ export const animeStore = writable({
     year: "",
     season: "",
     current: false
-  }
+  },
+  years: [],
+  seasons: []
 } as AnimeStore)

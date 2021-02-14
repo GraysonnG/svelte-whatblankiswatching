@@ -4,8 +4,8 @@ import type { CachedItem } from "../../utils/cachehelper";
 import { getStoredValue } from "../../utils/cachehelper";
 import { getAnimeList, CACHE_KEY } from "../../utils/kitsuhelper";
 import type KitsuResponse from "../../types/kitsuResponse"
-import { getAnimeDate } from '../../utils/datehelper';
-import { getAnimeSeason } from '../../utils/seasonhelper';
+import { getAnimeDate, getUniqueYears } from '../../utils/datehelper';
+import { getAnimeSeason, getUniqueSeasons } from '../../utils/seasonhelper';
 
 interface Stash extends CachedItem {
   data: KitsuResponse;
@@ -29,6 +29,8 @@ export const init = async () => {
       animeDate: getAnimeDate(preInfo),
       season: getAnimeSeason(preInfo)
     }))
+    state.years = getUniqueYears(state.list)
+    state.seasons = getUniqueSeasons(state.list)
     return state
   });
 }
