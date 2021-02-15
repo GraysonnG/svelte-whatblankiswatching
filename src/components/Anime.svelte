@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { AnimeInfo } from "../types/kitsuResponse";
+  import Image from "./Image.svelte";
   export let data: AnimeInfo;
 </script>
 
 <div>
-  <img
-    src={data.attributes.posterImage.small}
+  <Image
+    src={data.attributes.posterImage.large}
     alt={data.attributes.canonicalTitle}
   />
 </div>
@@ -16,10 +17,9 @@
     border-radius: 0.5em;
   }
 
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
+  @media only screen and (max-width: 581px) {
+    div {
+      max-height: 125px;
+    }
   }
 </style>

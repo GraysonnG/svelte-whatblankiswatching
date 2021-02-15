@@ -1,5 +1,6 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
+  import Checkbox from "./Checkbox.svelte";
 
   let disableSeason;
 
@@ -36,14 +37,10 @@
     {/each}
   </select>
 
-  <div class="input" id="current-wrapper">
-    <input
-      bind:checked={$animeStore.filters.current}
-      id="current"
-      name="current"
-      type="checkbox"
-    />
-    <label for="current">Show currently airing...</label>
+  <div id="current-wrapper">
+    <Checkbox bind:checked={$animeStore.filters.current} id="current">
+      Show currently airing...
+    </Checkbox>
   </div>
 </div>
 
@@ -79,14 +76,5 @@
 
   #current-wrapper {
     grid-area: current;
-  }
-
-  .input {
-    display: flex;
-    align-items: center;
-  }
-
-  .input > input {
-    margin-right: 0.5em;
   }
 </style>

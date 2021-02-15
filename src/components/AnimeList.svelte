@@ -32,32 +32,14 @@
   div {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 275px);
     justify-content: center;
     gap: 1em;
     box-sizing: border-box;
     padding: 1em 0;
   }
 
-  @media only screen and (max-width: 1200px) {
-    div {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
-
-  @media only screen and (max-width: 1000px) {
-    div {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-
-  @media only screen and (max-width: 800px) {
-    div {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 581px) {
     div {
       grid-template-columns: 1fr;
     }
