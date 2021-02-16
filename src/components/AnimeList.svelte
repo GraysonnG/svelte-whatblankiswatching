@@ -2,21 +2,12 @@
   import Anime from "./Anime.svelte";
   import { animeStore } from "../store/animeStore";
   import type { AnimeInfo } from "../types/kitsuResponse";
-  import {
-    filterCurrent,
-    filterSeason,
-    filterTitle,
-    filterYear,
-  } from "../utils/filters/animefilters";
+  import { filterList } from "../utils/filters/animefilters";
 
   let filteredList: AnimeInfo[];
 
   const _ = animeStore.subscribe((state) => {
-    filteredList = state.list
-      .filter((info) => filterTitle(info, state.filters.text))
-      .filter((info) => filterCurrent(info, state.filters.current))
-      .filter((info) => filterYear(info, state.filters.year))
-      .filter((info) => filterSeason(info, state.filters.season));
+    filteredList = filterList(state.list, state.filters);
   });
 </script>
 

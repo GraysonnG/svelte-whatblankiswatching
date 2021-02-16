@@ -1,11 +1,12 @@
-import { animeStore } from '../animeStore'
-import { add, isBefore } from "date-fns";
+import { animeStore } from "../animeStore";
+import { add } from "date-fns";
 import type { CachedItem } from "../../utils/cachehelper";
 import { getStoredValue } from "../../utils/cachehelper";
 import { getAnimeList, CACHE_KEY } from "../../utils/kitsuhelper";
-import type KitsuResponse from "../../types/kitsuResponse"
-import { getAnimeDate, getUniqueYears } from '../../utils/datehelper';
-import { getAnimeSeason, getUniqueSeasons } from '../../utils/seasonhelper';
+import type KitsuResponse from "../../types/kitsuResponse";
+import { getAnimeDate, getUniqueYears } from "../../utils/datehelper";
+import { getAnimeSeason, getUniqueSeasons } from "../../utils/seasonhelper";
+import { sortByStartDate, sortByTitle } from "../../utils/listsorters";
 
 interface Stash extends CachedItem {
   data: KitsuResponse;
@@ -24,29 +25,21 @@ export const init = async () => {
   ).data;
 
   animeStore.update((state) => {
-    state.list = animeData.included.map(preInfo => ({
+    state.list = animeData.included.map((preInfo) => ({
       ...preInfo,
       animeDate: getAnimeDate(preInfo),
-      season: getAnimeSeason(preInfo)
-    }))
-    state.years = getUniqueYears(state.list)
-    state.seasons = getUniqueSeasons(state.list)
-    return state
+      season: getAnimeSeason(preInfo),
+    }));
+    state.years = getUniqueYears(state.list);
+    state.seasons = getUniqueSeasons(state.list);
+    return state;
   });
-}
+};
 
 export const sort = async () => {
-  animeStore.update(state => {
-    state.list.sort((a, b) => {
-      const aStartDate = a.animeDate
-      const bStartDate = b.animeDate
-
-      if (isBefore(aStartDate, bStartDate)) return 1;
-      if (isBefore(bStartDate, aStartDate)) return -1;
-      return 0; // fuck you safari
-    })
-    state.loading = false
-    return state
-  })
-
-}
+  animeStore.update((state) => {
+    sortByStartDate(state.list);
+    state.loading = false;
+    return state;
+  });
+};

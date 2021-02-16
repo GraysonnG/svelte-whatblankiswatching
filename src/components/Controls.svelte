@@ -1,6 +1,7 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
   import Checkbox from "./Checkbox.svelte";
+  import Search from "./Search.svelte";
   import Select from "./Select.svelte";
 
   let disableSeason;
@@ -13,9 +14,8 @@
 </script>
 
 <div>
-  <input
+  <Search
     bind:value={$animeStore.filters.text}
-    type="text"
     placeholder="Search..."
     id="text"
   />
@@ -61,7 +61,7 @@
     }
   }
 
-  #text {
+  * :global(#text) {
     grid-area: search;
   }
 
