@@ -10,8 +10,8 @@
   };
 </script>
 
-<div on:click={handleClick} class={cls}>
-  <span for={id}>
+<div {id} on:click={handleClick} class={cls}>
+  <span>
     <slot />
   </span>
 </div>
@@ -27,18 +27,18 @@
     align-items: center;
     user-select: none;
     position: relative;
-    padding-left: calc(0.7em + 21px + 0.5em);
+    padding-left: calc(0.7em + 21px + 0.7em);
   }
 
   div.checkbox::after,
   div.checkbox::before {
     content: "";
     display: block;
-    height: 21px;
-    width: 21px;
+    height: 22px;
+    width: 22px;
     position: absolute;
     left: 0.7em;
-    top: 0.7em;
+    top: calc(50% - 11px);
     box-sizing: border-box;
   }
 
@@ -56,7 +56,7 @@
     border-bottom: 4px solid white;
     border-right: 6px solid white;
     transition: all 100ms ease-in-out;
-    transform: scale(0) rotate(45deg) scaleX(0.6) translate(-7%, -7%);
+    transform: scale(0) rotate(0deg) scaleX(0.6) translate(-7%, -7%);
     transform-origin: center center;
   }
 

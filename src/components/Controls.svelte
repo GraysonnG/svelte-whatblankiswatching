@@ -1,6 +1,7 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
   import Checkbox from "./Checkbox.svelte";
+  import Select from "./Select.svelte";
 
   let disableSeason;
 
@@ -11,7 +12,7 @@
   });
 </script>
 
-<div class="controls">
+<div>
   <input
     bind:value={$animeStore.filters.text}
     type="text"
@@ -19,14 +20,14 @@
     id="text"
   />
 
-  <select bind:value={$animeStore.filters.year} id="year">
+  <Select bind:value={$animeStore.filters.year} id="year">
     <option value="">Select Year...</option>
     {#each $animeStore.years as year}
       <option value={year}>{year}</option>
     {/each}
-  </select>
+  </Select>
 
-  <select
+  <Select
     disabled={disableSeason}
     bind:value={$animeStore.filters.season}
     id="season"
@@ -35,17 +36,15 @@
     {#each $animeStore.seasons as season}
       <option value={season}>{season}</option>
     {/each}
-  </select>
+  </Select>
 
-  <div id="current-wrapper">
-    <Checkbox bind:checked={$animeStore.filters.current} id="current">
-      Show currently airing...
-    </Checkbox>
-  </div>
+  <Checkbox bind:checked={$animeStore.filters.current} id="current">
+    Show currently airing...
+  </Checkbox>
 </div>
 
 <style>
-  .controls {
+  div {
     display: grid;
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
     grid-template-areas: "search year season current";
@@ -54,7 +53,7 @@
   }
 
   @media only screen and (max-width: 800px) {
-    .controls {
+    div {
       grid-template-areas:
         "search search search search"
         "year year season season"
@@ -66,15 +65,15 @@
     grid-area: search;
   }
 
-  #year {
+  * :global(#year) {
     grid-area: year;
   }
 
-  #season {
+  * :global(#season) {
     grid-area: season;
   }
 
-  #current-wrapper {
+  * :global(#current) {
     grid-area: current;
   }
 </style>

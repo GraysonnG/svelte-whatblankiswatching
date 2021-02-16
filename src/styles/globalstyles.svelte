@@ -10,6 +10,10 @@
     padding: 0.7em;
   }
 
+  :global(option) {
+    color: black;
+  }
+
   :global(select) {
     appearance: none;
   }
