@@ -12,21 +12,32 @@
 </script>
 
 <main>
-  <h1>What am I watching?</h1>
   <GlobalStyles />
-  <Controls />
-  <AnimeList />
+  <section>
+    <h1>What am I watching?</h1>
+    <Controls />
+    <AnimeList />
+  </section>
 </main>
 
 <style>
+  section {
+    background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, transparent 40em);
+    box-sizing: border-box;
+    padding: 2em;
+    border-radius: 1em;
+  }
   main {
-    width: 1500px;
+    width: calc(1500px + 4em);
     max-width: 100%;
     margin: 0 auto;
   }
 
   h1 {
+    margin-top: 0;
+    margin-bottom: 2rem;
     text-align: center;
     font-weight: 300;
+    font-size: 32px;
   }
 </style>
