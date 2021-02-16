@@ -2,6 +2,8 @@
   import type { AnimeInfo } from "../types/kitsuResponse";
   import Image from "./Image.svelte";
   export let data: AnimeInfo;
+
+  // TODO: do the rest of the thing here
 </script>
 
 <div>

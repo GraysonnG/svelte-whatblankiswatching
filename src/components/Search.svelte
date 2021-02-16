@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TODO: Remove implementation of anime store and provide this component with the info needed to display necessary information
   import { animeStore } from "../store/animeStore";
   import type { AnimeInfo } from "../types/kitsuResponse";
   import {
@@ -34,6 +35,7 @@
   };
 
   animeStore.subscribe((it) => {
+    // TODO: needs improvement
     searchSuggestions = sortByTitle(
       filterList([...it.list], it.filters)
         .filter((info) => filterTitleStartsWith(info, value))
