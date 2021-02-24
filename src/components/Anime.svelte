@@ -1,22 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import mobile from "is-mobile";
   import type { AnimeInfo } from "../types/kitsuResponse";
   import { Tilt } from "../utils/animationhelper";
   import Image from "./Image.svelte";
+  import {
+    addObserver,
+    removeObserver,
+  } from "../store/intersectionObserverStore";
   export let data: AnimeInfo;
 
   let wrapper;
   let tilt: Tilt;
   let visible = false;
-
-  let observer = new IntersectionObserver((elements) => {
-    if (elements[0].isIntersecting) {
-      visible = true;
-    } else {
-      visible = false;
-    }
-  });
 
   const handleReset = (e: MouseEvent) => {
     if (tilt) tilt.reset();
@@ -30,7 +26,14 @@
     if (!mobile()) {
       tilt = new Tilt(wrapper, 25);
     }
-    observer.observe(wrapper);
+    addObserver(wrapper, (element: IntersectionObserverEntry) => {
+      visible = element.isIntersecting;
+    });
+  });
+
+  onDestroy(() => {
+    removeObserver(wrapper);
+    tilt = null;
   });
 </script>
 

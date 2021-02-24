@@ -27,6 +27,8 @@
     padding: 2em;
     border-radius: 1em;
     margin-top: 8em;
+    transition: height 300ms;
+    overflow: hidden;
   }
 
   @media only screen and (max-width: 581px) {
