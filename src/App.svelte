@@ -26,6 +26,13 @@
     box-sizing: border-box;
     padding: 2em;
     border-radius: 1em;
+    margin-top: 8em;
+  }
+
+  @media only screen and (max-width: 581px) {
+    section {
+      padding: 0.5em;
+    }
   }
   main {
     width: calc(1500px + 4em);

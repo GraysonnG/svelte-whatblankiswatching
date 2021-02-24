@@ -49,7 +49,6 @@
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
     grid-template-areas: "search year season current";
     gap: 1em;
-    justify-content: center;
   }
 
   @media only screen and (max-width: 800px) {
