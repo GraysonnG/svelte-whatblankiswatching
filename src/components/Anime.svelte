@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import mobile from "is-mobile";
   import type { AnimeInfo } from "../types/kitsuResponse";
   import { Tilt } from "../utils/animationhelper";
   import Image from "./Image.svelte";
@@ -7,17 +8,29 @@
 
   let wrapper;
   let tilt: Tilt;
+  let visible = false;
+
+  let observer = new IntersectionObserver((elements) => {
+    if (elements[0].isIntersecting) {
+      visible = true;
+    } else {
+      visible = false;
+    }
+  });
 
   const handleReset = (e: MouseEvent) => {
-    tilt.reset();
+    if (tilt) tilt.reset();
   };
 
   const handleTilt = (e: MouseEvent) => {
-    tilt.animate(e);
+    if (tilt) tilt.animate(e);
   };
 
   onMount(() => {
-    tilt = new Tilt(wrapper, 25);
+    if (!mobile()) {
+      tilt = new Tilt(wrapper, 25);
+    }
+    observer.observe(wrapper);
   });
 </script>
 
@@ -28,14 +41,27 @@
   on:mouseleave={handleReset}
   on:mouseenter={handleTilt}
 >
-  <Image
-    src={data.attributes.posterImage.large}
-    alt={data.attributes.canonicalTitle}
-  />
+  {#if visible}
+    <Image
+      src={data.attributes.posterImage.large}
+      alt={data.attributes.canonicalTitle}
+    />
+    <a
+      class="nineanime"
+      href={`https://9anime.to/search?keyword=${data.attributes.slug}`}
+      target="_blank"
+    >
+      9Anime
+    </a>
 
-  <a href={`https://kitsu.io/anime/${data.attributes.slug}`} target="_blank">
-    <span>{data.attributes.canonicalTitle}</span>
-  </a>
+    <a
+      class="title"
+      href={`https://kitsu.io/anime/${data.attributes.slug}`}
+      target="_blank"
+    >
+      <span>{data.attributes.canonicalTitle}</span>
+    </a>
+  {/if}
 </div>
 
 <style>
@@ -48,7 +74,7 @@
     width: 100%;
   }
 
-  a {
+  a.title {
     display: flex;
     position: absolute;
     bottom: 0;
@@ -62,8 +88,27 @@
     z-index: 1;
   }
 
-  .card:hover a {
+  a.nineanime {
+    display: block;
+    position: absolute;
+    top: -3em;
+    right: 0.25em;
+    color: white;
+    background-color: #9600ff;
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 0.25em rgba(0, 0, 0, 0.5);
+    transition: top 200ms;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+
+  .card:hover a.title {
     height: 25%;
+  }
+
+  .card:hover a.nineanime {
+    top: 0.25em;
   }
 
   .card::after {
@@ -74,7 +119,7 @@
     width: 100%;
     top: 100%;
     left: 0;
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     background-color: rgba(0, 0, 0, 0.8);
     transition: all 200ms;
     transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);
@@ -90,6 +135,7 @@
     border-radius: 0.5em;
     position: relative;
     transition: transform 100ms;
+    height: 390px;
   }
 
   @media only screen and (max-width: 581px) {
@@ -97,8 +143,30 @@
       max-height: 125px;
     }
 
-    .card:hover a {
+    .card:hover::after {
+      width: 100%;
       height: 100%;
+      transform: none;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .card a.nineanime {
+      display: none;
+    }
+
+    .card a.title {
+      font-size: large;
+    }
+
+    .card:hover a.title {
+      height: 100%;
+    }
+
+    .card:hover::after {
+      height: 100%;
+      top: 0;
     }
   }
 </style>

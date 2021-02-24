@@ -31,7 +31,8 @@
 
   @media only screen and (max-width: 581px) {
     section {
-      padding: 0.5em;
+      padding: 2em 0.5em;
+      margin-top: 3em;
     }
   }
   main {
