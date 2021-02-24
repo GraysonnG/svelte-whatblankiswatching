@@ -102,8 +102,7 @@
     box-shadow: 0px 0px 0.25em rgba(0, 0, 0, 0.5);
     transition: top 200ms;
     box-sizing: border-box;
-    padding: 10px 20px;
-    font-weight: bold;
+    padding: 7px 14px;
   }
 
   .card:hover a.title {
@@ -122,7 +121,6 @@
     width: 100%;
     top: 100%;
     left: 0;
-    /* backdrop-filter: blur(5px); */
     background-color: rgba(0, 0, 0, 0.8);
     transition: all 200ms;
     transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);

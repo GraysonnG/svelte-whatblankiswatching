@@ -7,6 +7,7 @@
     filterTitleStartsWith,
   } from "../utils/filters/animefilters";
   import { sortByTitle } from "../utils/listsorters";
+  import { clickOutside } from "../utils/clickOutside";
 
   export let id;
   export let value: string;
@@ -14,6 +15,10 @@
 
   let searchSuggestions: AnimeInfo[] = [];
   let showSuggestions: boolean = false;
+
+  const handleClickOutside = () => {
+    showSuggestions = false;
+  };
 
   const handleClick = (e) => {
     value = e.target.textContent;
@@ -29,7 +34,6 @@
   };
 
   const clear = () => {
-    console.log("clear");
     value = "";
     close();
   };
@@ -45,7 +49,7 @@
   });
 </script>
 
-<div {id}>
+<div {id} use:clickOutside on:click_outside={handleClickOutside}>
   <input {placeholder} on:focus={open} bind:value type="text" />
   <span on:click={clear} />
   {#if showSuggestions}
