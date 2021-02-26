@@ -26,6 +26,7 @@
     if (!mobile()) {
       tilt = new Tilt(wrapper, 25);
     }
+
     addObserver(wrapper, (element: IntersectionObserverEntry) => {
       visible = element.isIntersecting;
     });
@@ -137,6 +138,7 @@
     position: relative;
     transition: transform 100ms;
     height: 390px;
+    box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.5);
   }
 
   @media only screen and (max-width: 581px) {
