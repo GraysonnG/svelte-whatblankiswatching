@@ -1,14 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import AnimeList from "./components/AnimeList.svelte";
   import Controls from "./components/Controls.svelte";
-  import { init, sort } from "./store/actions/animeActions";
+  import LoadingScreen from "./components/LoadingScreen.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
-
-  onMount(async () => {
-    await init();
-    await sort();
-  });
 </script>
 
 <main>
@@ -18,9 +12,10 @@
     <Controls />
     <AnimeList />
   </section>
+  <LoadingScreen />
 </main>
 
-<style>
+<style lang="scss">
   section {
     background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, transparent 40em);
     box-sizing: border-box;
@@ -29,14 +24,13 @@
     margin-top: 8em;
     transition: height 300ms;
     overflow: hidden;
-  }
 
-  @media only screen and (max-width: 581px) {
-    section {
+    @media only screen and (max-width: 581px) {
       padding: 2em 0.5em;
       margin-top: 3em;
     }
   }
+
   main {
     width: calc(1500px + 4em);
     max-width: 100%;

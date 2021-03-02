@@ -1,4 +1,4 @@
-import { isFuture } from 'date-fns'
+import { isFuture } from "date-fns";
 
 export interface CachedItem {
   expire: Date;
@@ -19,4 +19,8 @@ export async function getStoredValue<T extends CachedItem>(
     localStorage.setItem(value, JSON.stringify(storage));
     return storage;
   }
+}
+
+export function storedValueExists(value: string): Boolean {
+  return !!localStorage.getItem(value);
 }
