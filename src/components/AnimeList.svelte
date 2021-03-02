@@ -19,7 +19,7 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
   div {
     width: 100%;
     display: grid;
@@ -28,10 +28,8 @@
     gap: 1em;
     box-sizing: border-box;
     padding: 1em 0;
-  }
 
-  @media only screen and (max-width: 581px) {
-    div {
+    @media only screen and (max-width: 581px) {
       grid-template-columns: 1fr;
     }
   }

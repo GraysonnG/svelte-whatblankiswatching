@@ -22,16 +22,16 @@
 
 <img {src} {alt} class:loaded bind:this={thisImage} />
 
-<style>
+<style lang="scss">
   img {
     height: 100%;
     width: 100%;
     opacity: 0;
     object-fit: cover;
     transition: all 500ms;
-  }
 
-  img.loaded {
-    opacity: 1;
+    &.loaded {
+      opacity: 1;
+    }
   }
 </style>

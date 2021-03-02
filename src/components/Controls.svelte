@@ -43,16 +43,14 @@
   </Checkbox>
 </div>
 
-<style>
+<style lang="scss">
   div {
     display: grid;
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
     grid-template-areas: "search year season current";
     gap: 1em;
-  }
 
-  @media only screen and (max-width: 800px) {
-    div {
+    @media only screen and (max-width: 800px) {
       grid-template-areas:
         "search search search search"
         "year year season season"
@@ -60,19 +58,21 @@
     }
   }
 
-  * :global(#text) {
-    grid-area: search;
-  }
+  * {
+    :global(#text) {
+      grid-area: search;
+    }
 
-  * :global(#year) {
-    grid-area: year;
-  }
+    :global(#year) {
+      grid-area: year;
+    }
 
-  * :global(#season) {
-    grid-area: season;
-  }
+    :global(#season) {
+      grid-area: season;
+    }
 
-  * :global(#current) {
-    grid-area: current;
+    :global(#current) {
+      grid-area: current;
+    }
   }
 </style>

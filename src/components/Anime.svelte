@@ -68,70 +68,7 @@
   {/if}
 </div>
 
-<style>
-  span {
-    display: block;
-    text-align: center;
-    line-height: auto;
-    padding: 1em;
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  a.title {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    align-items: center;
-    color: white;
-    transition: height 200ms;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  a.nineanime {
-    display: block;
-    position: absolute;
-    top: -3em;
-    right: 0.25em;
-    color: white;
-    background-color: #9600ff;
-    border-radius: 0.5em;
-    box-shadow: 0px 0px 0.25em rgba(0, 0, 0, 0.5);
-    transition: top 200ms;
-    box-sizing: border-box;
-    padding: 7px 14px;
-  }
-
-  .card:hover a.title {
-    height: 25%;
-  }
-
-  .card:hover a.nineanime {
-    top: 0.25em;
-  }
-
-  .card::after {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 0;
-    width: 100%;
-    top: 100%;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    transition: all 200ms;
-    transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);
-  }
-
-  .card:hover::after {
-    height: 25%;
-    top: 75%;
-  }
-
+<style lang="scss">
   .card {
     overflow: hidden;
     border-radius: 0.5em;
@@ -139,37 +76,97 @@
     transition: transform 100ms;
     height: 390px;
     box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.5);
-  }
 
-  @media only screen and (max-width: 581px) {
-    .card {
-      max-height: 125px;
-    }
-
-    .card:hover::after {
+    span {
+      display: block;
+      text-align: center;
+      line-height: auto;
+      padding: 1em;
+      box-sizing: border-box;
       width: 100%;
-      height: 100%;
-      transform: none;
-      top: 0;
+    }
+
+    a.title {
+      display: flex;
+      position: absolute;
+      bottom: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 0%;
+      align-items: center;
+      color: white;
+      transition: height 200ms;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .card a.nineanime {
-      display: none;
+    a.nineanime {
+      display: block;
+      position: absolute;
+      top: -3em;
+      right: 0.25em;
+      color: white;
+      background-color: #9600ff;
+      border-radius: 0.5em;
+      box-shadow: 0px 0px 0.25em rgba(0, 0, 0, 0.5);
+      transition: top 200ms;
+      box-sizing: border-box;
+      padding: 7px 14px;
     }
 
-    .card a.title {
-      font-size: large;
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 0;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      transition: all 200ms;
+      transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);
     }
 
-    .card:hover a.title {
-      height: 100%;
+    &:hover {
+      a.title {
+        height: 25%;
+      }
+
+      a.nineanime {
+        top: 0.25em;
+      }
+
+      &::after {
+        height: 25%;
+        top: 75%;
+      }
     }
 
-    .card:hover::after {
-      height: 100%;
-      top: 0;
+    @media only screen and (max-width: 581px) {
+      max-height: 125px;
+
+      a.nineanime {
+        display: none;
+      }
+
+      a.title {
+        font-size: large;
+      }
+
+      &:hover {
+        a.title {
+          height: 100%;
+        }
+
+        &::after {
+          width: 100%;
+          height: 100%;
+          transform: none;
+          top: 0;
+          left: 0;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
     }
   }
 </style>

@@ -61,20 +61,18 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
   h1 {
     text-align: right;
     margin: 1rem;
     font-size: 10em;
     color: #1a1a1a;
-  }
 
-  h1:first-child {
-    text-align: left;
-  }
+    &:first-child {
+      text-align: left;
+    }
 
-  @media only screen and (max-width: 581px) {
-    h1 {
+    @media only screen and (max-width: 581px) {
       font-size: 4em;
     }
   }

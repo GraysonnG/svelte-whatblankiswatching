@@ -63,7 +63,7 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
   div {
     position: relative;
   }
@@ -99,28 +99,28 @@
     height: 22px;
     width: 22px;
     margin: auto 0;
-  }
 
-  span::after,
-  span::before {
-    content: "";
-    display: block;
-    position: relative;
-    transform-origin: center center;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: white;
-  }
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+      position: relative;
+      transform-origin: center center;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: white;
+    }
 
-  span::after {
-    top: calc(50% - 3px);
-    transform: rotate(45deg);
-  }
+    &::before {
+      top: calc(50% - 1px);
+      transform: rotate(-45deg);
+    }
 
-  span::before {
-    top: calc(50% - 1px);
-    transform: rotate(-45deg);
+    &::after {
+      top: calc(50% - 3px);
+      transform: rotate(45deg);
+    }
   }
 
   ul {
