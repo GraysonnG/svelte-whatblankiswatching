@@ -1,4 +1,4 @@
-<style>
+<style lang="scss">
   :global(input),
   :global(select) {
     display: block;
