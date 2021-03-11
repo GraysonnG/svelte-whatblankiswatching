@@ -1,4 +1,4 @@
-import { isFuture } from "date-fns";
+import { isFuture, isPast } from "date-fns";
 
 export interface CachedItem {
   expire: Date;
@@ -23,4 +23,14 @@ export async function getStoredValue<T extends CachedItem>(
 
 export function storedValueExists(value: string): Boolean {
   return !!localStorage.getItem(value);
+}
+
+export function storedValueExpired(value: string): Boolean {
+  if (storedValueExists(value)) {
+    const storedString = localStorage.getItem(value);
+    const storedValue = JSON.parse(storedString) as CachedItem;
+    const expireDate = new Date(storedValue.expire);
+    return isPast(expireDate);
+  }
+  return true;
 }

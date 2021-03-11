@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { init, sort } from "../store/actions/animeActions";
-  import { storedValueExists } from "../utils/cachehelper";
+  import { storedValueExpired } from "../utils/cachehelper";
   import { CACHE_KEY } from "../utils/kitsuhelper";
 
   let percentage = 0;
@@ -34,7 +34,7 @@
   };
 
   onMount(async () => {
-    if (storedValueExists(CACHE_KEY)) {
+    if (!storedValueExpired(CACHE_KEY)) {
       visible = false;
     } else {
       document.body.setAttribute("style", "overflow: hidden;");
