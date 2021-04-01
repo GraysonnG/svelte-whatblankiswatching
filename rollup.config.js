@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
+import graphql from "@rollup/plugin-graphql";
 
 // import { compile } from 'svelte/compiler';
 // const result = comiple(source, {
@@ -59,6 +60,7 @@ export default {
         dev: !production,
       },
     }),
+    graphql(),
     // we'll extract any component CSS out into
     // a separate file - better for performance
     css({ output: "bundle.css" }),
