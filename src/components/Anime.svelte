@@ -4,7 +4,7 @@
     addObserver,
     removeObserver,
   } from "../store/intersectionObserverStore";
-  import { afterUpdate, onDestroy } from "svelte/internal";
+  import { afterUpdate, beforeUpdate, onDestroy } from "svelte/internal";
   import Image from "./Image.svelte";
   import type { AnilistAnime } from "../types/anilistResponse";
   import { getSecondsSinceRequestDate } from "../utils/anilisthelper";
@@ -14,10 +14,17 @@
 
   export let data: AnilistAnime;
 
+  const getPrimaryStudios = () => {
+    return data.studios.edges
+      .filter((edge) => edge.isMain)
+      .map((edge) => edge.node);
+  };
+
   let wrapper;
   let visible = false;
   let secondsTillAiring: number = 0;
   let timeTillAiring: Time = createTimeFromSeconds(secondsTillAiring);
+  let studios = getPrimaryStudios();
 
   const initTimeStuff = () => {
     secondsTillAiring = !!data.nextAiringEpisode
@@ -34,16 +41,6 @@
 
   initTimeStuff();
 
-  const shouldShowStatus = () => {
-    return data.status.toLowerCase() === "releasing";
-  };
-
-  const getPrimaryStudios = () => {
-    return data.studios.edges
-      .filter((edge) => edge.isMain)
-      .map((edge) => edge.node);
-  };
-
   onMount(() => {
     addObserver(wrapper, (element: IntersectionObserverEntry) => {
       visible = element.isIntersecting;
@@ -52,6 +49,7 @@
 
   afterUpdate(() => {
     initTimeStuff();
+    studios = getPrimaryStudios();
   });
 
   onDestroy(() => {
@@ -67,7 +65,7 @@
         <a href={data.siteUrl} target="_blank">{data.title.romaji}</a>
         <hr />
         <div class="studio" href="#">
-          {#each getPrimaryStudios() as studio}
+          {#each studios as studio}
             <a href={studio.siteUrl} target="_blank">
               <Badge color={data.coverImage.color}>
                 {studio.name}
