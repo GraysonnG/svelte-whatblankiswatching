@@ -1,19 +1,19 @@
 <script lang="ts">
   import Anime from "./Anime.svelte";
   import { animeStore } from "../store/animeStore";
-  import type { AnimeInfo } from "../types/kitsuResponse";
   import { filterList } from "../utils/filters/animefilters";
+  import type { AnilistAnime } from "../types/anilistResponse";
 
-  let filteredList: AnimeInfo[];
+  let anilist: AnilistAnime[];
 
   const _ = animeStore.subscribe((state) => {
-    filteredList = filterList(state.list, state.filters);
+    anilist = filterList(state.anilist, state.filters);
   });
 </script>
 
 <div>
   {#if !$animeStore.loading}
-    {#each filteredList as anime}
+    {#each anilist as anime}
       <Anime data={anime} />
     {/each}
   {/if}

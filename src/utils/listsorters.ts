@@ -1,10 +1,12 @@
-import { add, isBefore } from "date-fns";
+import { isBefore } from "date-fns";
+import type { AnilistAnime } from "../types/anilistResponse";
 import type { AnimeInfo } from "../types/kitsuResponse";
+import { getAnimeDate } from "./datehelper";
 
-export const sortByStartDate = (list: AnimeInfo[]) => {
+export const sortByStartDate = (list: AnilistAnime[]) => {
   return list.sort((a, b) => {
-    const aStartDate = a.animeDate;
-    const bStartDate = b.animeDate;
+    const aStartDate = getAnimeDate(a);
+    const bStartDate = getAnimeDate(b);
 
     if (isBefore(aStartDate, bStartDate)) return 1;
     if (isBefore(bStartDate, aStartDate)) return -1;
@@ -12,10 +14,10 @@ export const sortByStartDate = (list: AnimeInfo[]) => {
   });
 };
 
-export const sortByTitle = (list: AnimeInfo[]) => {
+export const sortByTitle = (list: AnilistAnime[]) => {
   return list.sort((a, b) => {
-    if (a.attributes.canonicalTitle > b.attributes.canonicalTitle) return 1;
-    if (a.attributes.canonicalTitle < b.attributes.canonicalTitle) return -1;
+    if (a.title.romaji > b.title.romaji) return 1;
+    if (a.title.romaji < b.title.romaji) return -1;
     return 0;
   });
-};
+}

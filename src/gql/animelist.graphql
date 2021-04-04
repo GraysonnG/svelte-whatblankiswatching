@@ -1,0 +1,52 @@
+query {
+  MediaListCollection(
+    userName: "BlankTheEvil"
+    type: ANIME
+    sort: STARTED_ON_DESC
+  ) {
+    lists {
+      entries {
+        media {
+          title {
+            romaji
+          }
+          siteUrl
+          season
+          seasonYear
+          startDate {
+            year
+            month
+            day
+          }
+          genres
+          status
+          studios(isMain: true) {
+            edges {
+              node {
+                name
+                siteUrl
+              }
+              isMain
+            }
+            nodes {
+              name
+              isAnimationStudio
+            }
+          }
+          nextAiringEpisode {
+            airingAt
+            episode
+            timeUntilAiring
+          }
+          coverImage {
+            extraLarge
+            large
+            medium
+            color
+          }
+          episodes
+        }
+      }
+    }
+  }
+}

@@ -8,12 +8,13 @@
   } from "../utils/filters/animefilters";
   import { sortByTitle } from "../utils/listsorters";
   import { clickOutside } from "../utils/clickOutside";
+  import type { AnilistAnime } from "../types/anilistResponse";
 
   export let id;
   export let value: string;
   export let placeholder;
 
-  let searchSuggestions: AnimeInfo[] = [];
+  let searchSuggestions: AnilistAnime[] = [];
   let showSuggestions: boolean = false;
 
   const handleClickOutside = () => {
@@ -41,9 +42,9 @@
   animeStore.subscribe((it) => {
     // TODO: needs improvement
     searchSuggestions = sortByTitle(
-      filterList([...it.list], it.filters)
+      filterList([...it.anilist], it.filters)
         .filter((info) => filterTitleStartsWith(info, value))
-        .filter((info) => info.attributes.canonicalTitle !== value)
+        .filter((info) => info.title.romaji !== value)
     );
     showSuggestions = it.filters.text !== "" && searchSuggestions.length > 0;
   });
@@ -56,7 +57,7 @@
     <div class="suggestions">
       <ul>
         {#each searchSuggestions as suggestion}
-          <li on:click={handleClick}>{suggestion.attributes.canonicalTitle}</li>
+          <li on:click={handleClick}>{suggestion.title.romaji}</li>
         {/each}
       </ul>
     </div>

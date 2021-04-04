@@ -92,6 +92,7 @@
     opacity: 1;
     transition: all 500ms;
     overflow: hidden;
+    z-index: 10000;
   }
 
   .bar {

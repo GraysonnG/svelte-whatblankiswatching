@@ -29,11 +29,6 @@ body::before, body::after {
 
 body::after {
 	background-image: url("./img/wp-1.jpg");
-	animation: fadeInOut 20s ease-in-out infinite alternate;
-}
-
-body::before {
-	background-image: url("./img/wp-2.jpg");
 }
 
 a {
@@ -83,11 +78,4 @@ button:not(:disabled):active {
 
 button:focus {
 	border-color: #666;
-}
-
-@keyframes fadeInOut {
-	0% { opacity: 1; }
-	45% { opacity: 1; }
-	55% { opacity: 0; }
-	100% { opacity: 0; }
 }

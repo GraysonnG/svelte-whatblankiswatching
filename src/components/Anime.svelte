@@ -1,70 +1,89 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
-  import mobile from "is-mobile";
-  import type { AnimeInfo } from "../types/kitsuResponse";
-  import { Tilt } from "../utils/animationhelper";
-  import Image from "./Image.svelte";
+  import { onMount } from "svelte";
   import {
     addObserver,
     removeObserver,
   } from "../store/intersectionObserverStore";
-  export let data: AnimeInfo;
+  import { afterUpdate, onDestroy } from "svelte/internal";
+  import Image from "./Image.svelte";
+  import type { AnilistAnime } from "../types/anilistResponse";
+  import { getSecondsSinceRequestDate } from "../utils/anilisthelper";
+  import { createTimeFromSeconds } from "../utils/datehelper";
+  import type { Time } from "../utils/datehelper";
+  import Badge from "./Badge.svelte";
+
+  export let data: AnilistAnime;
 
   let wrapper;
-  let tilt: Tilt;
   let visible = false;
+  let secondsTillAiring: number = 0;
+  let timeTillAiring: Time = createTimeFromSeconds(secondsTillAiring);
 
-  const handleReset = (e: MouseEvent) => {
-    if (tilt) tilt.reset();
+  const initTimeStuff = () => {
+    secondsTillAiring = !!data.nextAiringEpisode
+      ? data.nextAiringEpisode.timeUntilAiring
+      : 0;
+
+    timeTillAiring = createTimeFromSeconds(secondsTillAiring);
+
+    if (secondsTillAiring > 0) {
+      secondsTillAiring -= getSecondsSinceRequestDate();
+      timeTillAiring = createTimeFromSeconds(secondsTillAiring);
+    }
   };
 
-  const handleTilt = (e: MouseEvent) => {
-    if (tilt) tilt.animate(e);
+  initTimeStuff();
+
+  const shouldShowStatus = () => {
+    return data.status.toLowerCase() === "releasing";
+  };
+
+  const getPrimaryStudios = () => {
+    return data.studios.edges
+      .filter((edge) => edge.isMain)
+      .map((edge) => edge.node);
   };
 
   onMount(() => {
-    if (!mobile()) {
-      tilt = new Tilt(wrapper, 25);
-    }
-
     addObserver(wrapper, (element: IntersectionObserverEntry) => {
       visible = element.isIntersecting;
     });
   });
 
+  afterUpdate(() => {
+    initTimeStuff();
+  });
+
   onDestroy(() => {
     removeObserver(wrapper);
-    tilt = null;
   });
 </script>
 
-<div
-  class="card"
-  bind:this={wrapper}
-  on:mousemove={handleTilt}
-  on:mouseleave={handleReset}
-  on:mouseenter={handleTilt}
->
+<div class="card" bind:this={wrapper}>
   {#if visible}
-    <Image
-      src={data.attributes.posterImage.large}
-      alt={data.attributes.canonicalTitle}
-    />
-    <a
-      class="nineanime"
-      href={`https://9anime.to/search?keyword=${data.attributes.slug}`}
-      target="_blank"
-    >
-      9Anime
-    </a>
-
-    <a
-      class="title"
-      href={`https://kitsu.io/anime/${data.attributes.slug}`}
-      target="_blank"
-    >
-      <span>{data.attributes.canonicalTitle}</span>
-    </a>
+    <Image src={data.coverImage.large} alt={data.title.romaji} />
+    <div class="title">
+      <span>
+        <a href={data.siteUrl} target="_blank">{data.title.romaji}</a>
+        <hr />
+        <div class="studio" href="#">
+          {#each getPrimaryStudios() as studio}
+            <a href={studio.siteUrl} target="_blank">
+              <Badge color={data.coverImage.color}>
+                {studio.name}
+              </Badge>
+            </a>
+          {/each}
+        </div>
+      </span>
+    </div>
+    {#if !!data.nextAiringEpisode}
+      <div class={`status`}>
+        <span class="dot" />Episode {data.nextAiringEpisode
+          .episode}/{data.episodes ? data.episodes : "??"}:&nbsp;
+        <span class="time">{timeTillAiring.days}d {timeTillAiring.hour}h</span>
+      </div>
+    {/if}
   {/if}
 </div>
 
@@ -77,16 +96,7 @@
     height: 390px;
     box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.5);
 
-    span {
-      display: block;
-      text-align: center;
-      line-height: auto;
-      padding: 1em;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    a.title {
+    .title {
       display: flex;
       position: absolute;
       bottom: 0;
@@ -94,24 +104,72 @@
       width: 100%;
       height: 0%;
       align-items: center;
+      justify-content: flex-end;
       color: white;
       transition: height 200ms;
       overflow: hidden;
       z-index: 1;
+      flex-direction: column;
+
+      * {
+        color: white;
+        text-decoration: none;
+      }
+
+      & > span {
+        color: white;
+        display: block;
+        text-align: center;
+        padding: 1em;
+        box-sizing: border-box;
+        width: 100%;
+
+        hr {
+          margin: 0.25em;
+          margin-bottom: 0.5em;
+          opacity: 0.3;
+        }
+
+        .studio {
+          font-size: 0.7em;
+          display: flex;
+          gap: 1em;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+      }
     }
 
-    a.nineanime {
-      display: block;
+    .status {
       position: absolute;
-      top: -3em;
-      right: 0.25em;
-      color: white;
-      background-color: #9600ff;
-      border-radius: 0.5em;
-      box-shadow: 0px 0px 0.25em rgba(0, 0, 0, 0.5);
-      transition: top 200ms;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 1em;
+      margin: 0.5em;
+      padding: 0.25em;
+      padding-right: 0.5em;
       box-sizing: border-box;
-      padding: 7px 14px;
+      font-size: 0.8em;
+      line-height: 1;
+      font-weight: bold;
+      z-index: 2;
+
+      .dot {
+        background-color: lime;
+        box-sizing: border-box;
+        padding: 0.33em;
+        margin-right: 0.5em;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 0.8);
+      }
+      .time {
+        color: #aaa;
+      }
     }
 
     &::after {
@@ -123,21 +181,18 @@
       top: 100%;
       left: 0;
       background-color: rgba(0, 0, 0, 0.8);
+      box-sizing: border-box;
       transition: all 200ms;
       transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);
     }
 
     &:hover {
-      a.title {
-        height: 25%;
-      }
-
-      a.nineanime {
-        top: 0.25em;
+      .title {
+        height: 33%;
       }
 
       &::after {
-        height: 25%;
+        height: 33%;
         top: 75%;
       }
     }
@@ -145,16 +200,12 @@
     @media only screen and (max-width: 581px) {
       max-height: 125px;
 
-      a.nineanime {
-        display: none;
-      }
-
-      a.title {
+      .title {
         font-size: large;
       }
 
       &:hover {
-        a.title {
+        .title {
           height: 100%;
         }
 

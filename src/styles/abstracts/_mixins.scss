@@ -1,0 +1,5 @@
+@mixin viewport-small {
+  @media only screen and (max-width: 581px) {
+    @content
+  }
+}

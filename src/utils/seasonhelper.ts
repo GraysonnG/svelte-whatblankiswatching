@@ -1,24 +1,5 @@
-import { AnimeInfo, Season } from "../types/kitsuResponse"
-import { getAnimeDate } from "./datehelper";
-
-export const getAnimeSeason = (anime: AnimeInfo) => {
-  switch(getAnimeDate(anime).getMonth()) {
-    case 0:
-    case 1:
-    case 2:
-      return Season.WINTER;
-    case 3:
-    case 4:
-    case 5:
-      return Season.SPRING;
-    case 6:
-    case 7:
-    case 8:
-      return Season.SUMMER;
-    default:
-      return Season.FALL;
-  }
-}
+import type { AnilistAnime } from "../types/anilistResponse";
+import { Season } from "../types/kitsuResponse"
 
 export const getSeasonWeight = (season: Season) => {
   switch(season) {
@@ -33,10 +14,18 @@ export const getSeasonWeight = (season: Season) => {
   }
 }
 
-export const getUniqueSeasons = (list: AnimeInfo[]) => {
-  return [...new Set(list.map(anime => anime.season))].sort((a, b) => {
-    if (getSeasonWeight(a) > getSeasonWeight(b)) return 1
-    if (getSeasonWeight(b) > getSeasonWeight(a)) return -1
-    return 0
+export const toProperCase = (string: string) => {
+  return string.toLowerCase().replace(/\w\S*/g, (txt: string) => {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   })
+}
+
+export const getUniqueSeasons = (list: AnilistAnime[]) => {
+  return [...new Set(list.map(info => info.season))].sort(
+    (a, b) => {
+      if (getSeasonWeight(a) > getSeasonWeight(b)) return 1
+      if (getSeasonWeight(b) > getSeasonWeight(a)) return -1
+      return 0
+    }
+  )
 }

@@ -21,6 +21,14 @@ export async function getStoredValue<T extends CachedItem>(
   }
 }
 
+export function getStoredValueUnsafe<T extends CachedItem>(
+  value: string
+): T | null {
+  if (storedValueExists(value)) {
+    return JSON.parse(localStorage.getItem(value)) as T
+  } else return null;
+}
+
 export function storedValueExists(value: string): Boolean {
   return !!localStorage.getItem(value);
 }

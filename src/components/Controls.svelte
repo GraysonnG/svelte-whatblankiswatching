@@ -1,5 +1,6 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
+  import { toProperCase } from "../utils/seasonhelper";
   import Checkbox from "./Checkbox.svelte";
   import Search from "./Search.svelte";
   import Select from "./Select.svelte";
@@ -34,7 +35,7 @@
   >
     <option value="">Select Season...</option>
     {#each $animeStore.seasons as season}
-      <option value={season}>{season}</option>
+      <option value={season}>{toProperCase(season)}</option>
     {/each}
   </Select>
 
