@@ -1,9 +1,9 @@
 import { differenceInSeconds } from "date-fns";
 import schema from "../gql/animelist.graphql";
 import type { AniStash } from "../store/actions/animeActions";
-import type AnilistResponse from "../types/anilistResponse";
-import type { AnilistAnime } from "../types/anilistResponse";
-import { getStoredValue, getStoredValueUnsafe } from "./cachehelper";
+import type AnilistResponse from "../types/anilist";
+import type { AnilistAnime } from "../types/anilist";
+import { getStoredValueUnsafe } from "./cachehelper";
 
 const ANILIST_API = "https://graphql.anilist.co";
 

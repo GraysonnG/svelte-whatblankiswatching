@@ -2,16 +2,11 @@ import { animeStore } from "../animeStore";
 import { add } from "date-fns";
 import type { CachedItem } from "../../utils/cachehelper";
 import { getStoredValue } from "../../utils/cachehelper";
-import type KitsuResponse from "../../types/kitsuResponse";
 import { getUniqueYears } from "../../utils/datehelper";
 import { getUniqueSeasons } from "../../utils/seasonhelper";
-import { sortByStartDate, sortByTitle } from "../../utils/listsorters";
+import { sortByStartDate } from "../../utils/listsorters";
 import { ANILIST_CACHE_KEY, getAnilistAnimeList } from "../../utils/anilisthelper";
-import type { AnilistAnime } from "../../types/anilistResponse";
-
-interface Stash extends CachedItem {
-  data: KitsuResponse;
-}
+import { AnilistAnime, Season } from "../../types/anilist";
 
 export interface AniStash extends CachedItem {
   data: AnilistAnime[];
@@ -28,6 +23,8 @@ export const init = async () => {
       })
     }
   })).data
+
+  anilist.filter(it => it.season === null).forEach(it => it.season = Season.WINTER)
 
   animeStore.update((state) => {
     state.anilist = anilist

@@ -1,14 +1,13 @@
 <script lang="ts">
   // TODO: Remove implementation of anime store and provide this component with the info needed to display necessary information
-  import { animeStore } from "../store/animeStore";
-  import type { AnimeInfo } from "../types/kitsuResponse";
+  import { animeStore } from "../../store/animeStore";
   import {
     filterList,
     filterTitleStartsWith,
-  } from "../utils/filters/animefilters";
-  import { sortByTitle } from "../utils/listsorters";
-  import { clickOutside } from "../utils/clickOutside";
-  import type { AnilistAnime } from "../types/anilistResponse";
+  } from "../../utils/filters/animefilters";
+  import { sortByTitle } from "../../utils/listsorters";
+  import { clickOutside } from "../../utils/clickOutside";
+  import type { AnilistAnime } from "../../types/anilist";
 
   export let id;
   export let value: string;

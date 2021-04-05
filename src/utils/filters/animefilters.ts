@@ -1,5 +1,6 @@
 import type { Filters } from "../../store/animeStore";
-import type { AnilistAnime } from "../../types/anilistResponse";
+import type { AnilistAnime } from "../../types/anilist";
+import { animeStartsWithinTwoWeeks } from "../datehelper";
 
 export const filterTitle = (anime: AnilistAnime, text: string) => {
   if (anime.title.romaji === undefined) {
@@ -19,7 +20,13 @@ export const filterTitleStartsWith = (anime: AnilistAnime, text: string) => {
 export const filterCurrent = (anime: AnilistAnime, current: boolean) => {
   return (
     !current ||
-    (current && anime.status.toLowerCase().includes("releasing"))
+    (current && (
+      anime.status.toLowerCase().includes("releasing") ||
+      (
+        anime.status.toLowerCase().includes("not_yet_released") &&
+        animeStartsWithinTwoWeeks(anime)
+      )
+    ))
   );
 };
 

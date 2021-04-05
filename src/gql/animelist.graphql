@@ -28,10 +28,6 @@ query {
               }
               isMain
             }
-            nodes {
-              name
-              isAnimationStudio
-            }
           }
           nextAiringEpisode {
             airingAt

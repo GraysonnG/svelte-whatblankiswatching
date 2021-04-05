@@ -1,5 +1,5 @@
-import type { AnilistAnime } from "../types/anilistResponse";
-import { Season } from "../types/kitsuResponse"
+import type { AnilistAnime } from "../types/anilist";
+import { Season } from "../types/anilist";
 
 export const getSeasonWeight = (season: Season) => {
   switch(season) {

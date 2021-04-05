@@ -1,3 +1,5 @@
+import type { CachedItem } from "../utils/cachehelper";
+
 export default interface AnilistResponse {
   data: {
     MediaListCollection: {
@@ -28,12 +30,16 @@ export interface AnilistAnime {
       isMain: boolean;
       node: AnilistStudio;
     }[]
-    nodes: AnilistStudio[];
   };
   nextAiringEpisode: AnilistNextEpisode | null;
   coverImage: Image;
   episodes: number;
   siteUrl: string;
+}
+
+export interface AniStash extends CachedItem {
+  data: AnilistAnime[];
+  requestDate: Date;
 }
 
 export enum Season {

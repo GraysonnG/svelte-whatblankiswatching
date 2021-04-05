@@ -1,6 +1,5 @@
 import { isBefore } from "date-fns";
-import type { AnilistAnime } from "../types/anilistResponse";
-import type { AnimeInfo } from "../types/kitsuResponse";
+import type { AnilistAnime } from "../types/anilist";
 import { getAnimeDate } from "./datehelper";
 
 export const sortByStartDate = (list: AnilistAnime[]) => {

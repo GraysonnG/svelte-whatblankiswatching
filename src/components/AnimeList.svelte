@@ -2,12 +2,19 @@
   import Anime from "./Anime.svelte";
   import { animeStore } from "../store/animeStore";
   import { filterList } from "../utils/filters/animefilters";
-  import type { AnilistAnime } from "../types/anilistResponse";
+  import type { AnilistAnime } from "../types/anilist";
+  import { onMount } from "svelte";
+  import { init, sort } from "../store/actions/animeActions";
 
   let anilist: AnilistAnime[];
 
   const _ = animeStore.subscribe((state) => {
     anilist = filterList(state.anilist, state.filters);
+  });
+
+  onMount(async () => {
+    await init();
+    await sort();
   });
 </script>
 

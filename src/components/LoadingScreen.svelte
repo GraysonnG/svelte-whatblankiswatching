@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { init, sort } from "../store/actions/animeActions";
+  import { ANILIST_CACHE_KEY } from "../utils/anilisthelper";
   import { storedValueExpired } from "../utils/cachehelper";
-  import { CACHE_KEY } from "../utils/kitsuhelper";
+  import { animeStore } from "../store/animeStore";
 
   let percentage = 0;
   let max = 90;
@@ -34,7 +34,7 @@
   };
 
   onMount(async () => {
-    if (!storedValueExpired(CACHE_KEY)) {
+    if (!storedValueExpired(ANILIST_CACHE_KEY)) {
       visible = false;
     } else {
       document.body.setAttribute("style", "overflow: hidden;");
@@ -43,10 +43,12 @@
         animate();
       });
     }
+  });
 
-    await init();
-    max = 100;
-    await sort();
+  animeStore.subscribe((state) => {
+    if (!state.loading) {
+      max = 100;
+    }
   });
 </script>
 

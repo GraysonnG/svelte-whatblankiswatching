@@ -4,52 +4,24 @@
     addObserver,
     removeObserver,
   } from "../store/intersectionObserverStore";
-  import { afterUpdate, beforeUpdate, onDestroy } from "svelte/internal";
-  import Image from "./Image.svelte";
-  import type { AnilistAnime } from "../types/anilistResponse";
-  import { getSecondsSinceRequestDate } from "../utils/anilisthelper";
-  import { createTimeFromSeconds } from "../utils/datehelper";
-  import type { Time } from "../utils/datehelper";
-  import Badge from "./Badge.svelte";
+  import { onDestroy } from "svelte/internal";
+  import Image from "./basic/Image.svelte";
+  import type { AnilistAnime } from "../types/anilist";
+  import Badge from "./basic/Badge.svelte";
+  import AnimeStatusInfo from "./anime/AnimeStatusInfo.svelte";
 
   export let data: AnilistAnime;
 
-  const getPrimaryStudios = () => {
-    return data.studios.edges
-      .filter((edge) => edge.isMain)
-      .map((edge) => edge.node);
-  };
-
   let wrapper;
   let visible = false;
-  let secondsTillAiring: number = 0;
-  let timeTillAiring: Time = createTimeFromSeconds(secondsTillAiring);
-  let studios = getPrimaryStudios();
-
-  const initTimeStuff = () => {
-    secondsTillAiring = !!data.nextAiringEpisode
-      ? data.nextAiringEpisode.timeUntilAiring
-      : 0;
-
-    timeTillAiring = createTimeFromSeconds(secondsTillAiring);
-
-    if (secondsTillAiring > 0) {
-      secondsTillAiring -= getSecondsSinceRequestDate();
-      timeTillAiring = createTimeFromSeconds(secondsTillAiring);
-    }
-  };
-
-  initTimeStuff();
+  $: studios = data.studios.edges
+    .filter((edge) => edge.isMain)
+    .map((edge) => edge.node);
 
   onMount(() => {
     addObserver(wrapper, (element: IntersectionObserverEntry) => {
       visible = element.isIntersecting;
     });
-  });
-
-  afterUpdate(() => {
-    initTimeStuff();
-    studios = getPrimaryStudios();
   });
 
   onDestroy(() => {
@@ -76,11 +48,7 @@
       </span>
     </div>
     {#if !!data.nextAiringEpisode}
-      <div class={`status`}>
-        <span class="dot" />Episode {data.nextAiringEpisode
-          .episode}/{data.episodes ? data.episodes : "??"}:&nbsp;
-        <span class="time">{timeTillAiring.days}d {timeTillAiring.hour}h</span>
-      </div>
+      <AnimeStatusInfo {data} />
     {/if}
   {/if}
 </div>
@@ -136,37 +104,6 @@
           justify-content: center;
           flex-wrap: wrap;
         }
-      }
-    }
-
-    .status {
-      position: absolute;
-      left: 0;
-      top: 0;
-      display: flex;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.8);
-      border-radius: 1em;
-      margin: 0.5em;
-      padding: 0.25em;
-      padding-right: 0.5em;
-      box-sizing: border-box;
-      font-size: 0.8em;
-      line-height: 1;
-      font-weight: bold;
-      z-index: 2;
-
-      .dot {
-        background-color: lime;
-        box-sizing: border-box;
-        padding: 0.33em;
-        margin-right: 0.5em;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 0.8);
-      }
-      .time {
-        color: #aaa;
       }
     }
 

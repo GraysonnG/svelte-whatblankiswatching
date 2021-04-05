@@ -1,9 +1,9 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
   import { toProperCase } from "../utils/seasonhelper";
-  import Checkbox from "./Checkbox.svelte";
-  import Search from "./Search.svelte";
-  import Select from "./Select.svelte";
+  import Checkbox from "./controls/Checkbox.svelte";
+  import Search from "./controls/Search.svelte";
+  import Select from "./controls/Select.svelte";
 
   let disableSeason;
 

@@ -1,12 +1,5 @@
-import type { AnimeInfo } from "../types/kitsuResponse";
-import { add } from "date-fns";
-import type { AnilistAnime } from "../types/anilistResponse";
-
-// export const getAnimeDate = (anime: AnimeInfo) => {
-//   return add(new Date(anime.attributes.startDate.replace(/-/g, "/")), {
-//     days: 14,
-//   });
-// };
+import { add, isBefore } from "date-fns";
+import type { AnilistAnime } from "../types/anilist";
 
 export interface Time {
   sec: number;
@@ -18,7 +11,7 @@ export interface Time {
 export const getAnimeDate = (anime: AnilistAnime) => {
   return new Date(
     anime.startDate.year,
-    anime.startDate.month,
+    anime.startDate.month - 1,
     anime.startDate.day,
     0, 0, 0, 0
     );
@@ -31,6 +24,10 @@ export const getUniqueYears = (list: AnilistAnime[]) => {
       if (a < b) return 1;
       return 0;
     })
+}
+
+export const animeStartsWithinTwoWeeks = (anime: AnilistAnime) => {
+  return isBefore(getAnimeDate(anime), add(new Date, { weeks: 2 }))
 }
 
 export const createTimeFromSeconds = (seconds: number): Time => {
