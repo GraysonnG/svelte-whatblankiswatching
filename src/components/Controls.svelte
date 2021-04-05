@@ -1,16 +1,27 @@
 <script lang="ts">
   import { animeStore } from "../store/animeStore";
+  import {
+    filterList,
+    filterTitleStartsWith,
+  } from "../utils/filters/animefilters";
+  import { sortByTitle } from "../utils/listsorters";
   import { toProperCase } from "../utils/seasonhelper";
   import Checkbox from "./controls/Checkbox.svelte";
   import Search from "./controls/Search.svelte";
   import Select from "./controls/Select.svelte";
 
   let disableSeason;
+  let searchSuggestions: string[] = [];
 
-  // this is ugly
   const _ = animeStore.subscribe((it) => {
     disableSeason = it.filters.year === "";
     if (disableSeason) it.filters.season = "";
+
+    searchSuggestions = sortByTitle(
+      filterList([...it.anilist], it.filters)
+        .filter((info) => filterTitleStartsWith(info, it.filters.text))
+        .filter((info) => info.title.romaji !== it.filters.text)
+    ).map((ani) => ani.title.romaji);
   });
 </script>
 
@@ -19,6 +30,7 @@
     bind:value={$animeStore.filters.text}
     placeholder="Search..."
     id="text"
+    suggestions={searchSuggestions}
   />
 
   <Select bind:value={$animeStore.filters.year} id="year">

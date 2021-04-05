@@ -1,19 +1,11 @@
 <script lang="ts">
-  // TODO: Remove implementation of anime store and provide this component with the info needed to display necessary information
-  import { animeStore } from "../../store/animeStore";
-  import {
-    filterList,
-    filterTitleStartsWith,
-  } from "../../utils/filters/animefilters";
-  import { sortByTitle } from "../../utils/listsorters";
   import { clickOutside } from "../../utils/clickOutside";
-  import type { AnilistAnime } from "../../types/anilist";
 
   export let id;
   export let value: string;
   export let placeholder;
+  export let suggestions: string[];
 
-  let searchSuggestions: AnilistAnime[] = [];
   let showSuggestions: boolean = false;
 
   const handleClickOutside = () => {
@@ -26,7 +18,7 @@
   };
 
   const open = () => {
-    showSuggestions = searchSuggestions.length > 0;
+    showSuggestions = suggestions.length > 0;
   };
 
   const close = () => {
@@ -37,16 +29,6 @@
     value = "";
     close();
   };
-
-  animeStore.subscribe((it) => {
-    // TODO: needs improvement
-    searchSuggestions = sortByTitle(
-      filterList([...it.anilist], it.filters)
-        .filter((info) => filterTitleStartsWith(info, value))
-        .filter((info) => info.title.romaji !== value)
-    );
-    showSuggestions = it.filters.text !== "" && searchSuggestions.length > 0;
-  });
 </script>
 
 <div {id} use:clickOutside on:click_outside={handleClickOutside}>
@@ -55,8 +37,8 @@
   {#if showSuggestions}
     <div class="suggestions">
       <ul>
-        {#each searchSuggestions as suggestion}
-          <li on:click={handleClick}>{suggestion.title.romaji}</li>
+        {#each suggestions as suggestion}
+          <li on:click={handleClick}>{suggestion}</li>
         {/each}
       </ul>
     </div>
