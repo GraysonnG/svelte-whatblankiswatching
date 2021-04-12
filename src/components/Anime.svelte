@@ -32,7 +32,7 @@
 <div
   class="card"
   bind:this={wrapper}
-  style={`color: ${data.coverImage.color};`}
+  style={`color: ${data.coverImage.color ? data.coverImage.color : "#ffffff"};`}
 >
   {#if visible}
     <Image src={data.coverImage.large} alt={data.title.romaji} />
