@@ -2,9 +2,11 @@
   import AnimeList from "./components/AnimeList.svelte";
   import Controls from "./components/Controls.svelte";
   import LoadingScreen from "./components/LoadingScreen.svelte";
+  import Meta from "./meta/Meta.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
 </script>
 
+<Meta />
 <main>
   <GlobalStyles />
   <section>
