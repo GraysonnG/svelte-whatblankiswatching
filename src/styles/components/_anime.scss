@@ -54,6 +54,10 @@
     }
   }
 
+  &:empty::after {
+    all: unset;
+  }
+
   &::after {
     content: "";
     position: absolute;
