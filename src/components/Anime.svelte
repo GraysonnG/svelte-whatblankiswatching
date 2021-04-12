@@ -14,7 +14,7 @@
 
   let wrapper;
   let visible = false;
-  $: studios = data.studios.edges
+  let studios = data.studios.edges
     .filter((edge) => edge.isMain)
     .map((edge) => edge.node);
 
@@ -29,7 +29,11 @@
   });
 </script>
 
-<div class="card" bind:this={wrapper}>
+<div
+  class="card"
+  bind:this={wrapper}
+  style={`color: ${data.coverImage.color};`}
+>
   {#if visible}
     <Image src={data.coverImage.large} alt={data.title.romaji} />
     <div class="title">
@@ -37,7 +41,7 @@
         <a href={data.siteUrl} target="_blank">{data.title.romaji}</a>
         <hr />
         <div class="studio" href="#">
-          {#each studios as studio}
+          {#each studios as studio (studio.id)}
             <a href={studio.siteUrl} target="_blank">
               <Badge color={data.coverImage.color}>
                 {studio.name}
@@ -61,6 +65,7 @@
     transition: transform 100ms;
     height: 390px;
     box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
 
     .title {
       display: flex;
@@ -116,6 +121,8 @@
       top: 100%;
       left: 0;
       background-color: rgba(0, 0, 0, 0.8);
+      border-color: currentColor;
+      border-top: 1px solid;
       box-sizing: border-box;
       transition: all 200ms;
       transform: rotate(5deg) translateY(2em) scaleX(1.5) scaleY(1.75);

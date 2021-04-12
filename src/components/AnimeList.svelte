@@ -20,7 +20,7 @@
 
 <div>
   {#if !$animeStore.loading}
-    {#each anilist as anime}
+    {#each anilist as anime (`${anime.id}-${anime.title.romaji}`)}
       <Anime data={anime} />
     {/each}
   {/if}

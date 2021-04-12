@@ -7,6 +7,7 @@ query {
     lists {
       entries {
         media {
+          id
           title {
             romaji
           }
@@ -23,6 +24,7 @@ query {
           studios(isMain: true) {
             edges {
               node {
+                id
                 name
                 siteUrl
               }

@@ -13,6 +13,7 @@ export default interface AnilistResponse {
 }
 
 export interface AnilistAnime {
+  id: number;
   title: {
     romaji: string;
   };
@@ -57,6 +58,7 @@ interface Image {
 }
 
 interface AnilistStudio {
+  id: string;
   name: string;
   isAnimationStudio: boolean;
   siteUrl: string;
