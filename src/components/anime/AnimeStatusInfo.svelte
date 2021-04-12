@@ -31,6 +31,7 @@
     top: 0;
     display: flex;
     align-items: center;
+    color: white;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 1em;
     margin: 0.5em;
@@ -59,9 +60,10 @@
         content: "";
         animation: pulse 2s ease-out infinite;
         background-color: currentColor;
-        padding: 0.33em;
-        left: 0;
-        top: 0;
+        width: 16px;
+        height: 16px;
+        left: calc(50% - 8px);
+        top: calc(50% - 8px);
         border-radius: 50%;
         opacity: 0.3;
       }
@@ -73,29 +75,29 @@
 
   @keyframes pulse {
     0% {
-      left: -6px;
-      top: -6px;
-      width: 11px;
-      height: 11px;
+      left: calc(50% - 8px);
+      top: calc(50% - 8px);
+      width: 16px;
+      height: 16px;
       opacity: 0;
     }
     50% {
-      left: -6px;
-      top: -6px;
-      width: 11px;
-      height: 11px;
+      left: calc(50% - 8px);
+      top: calc(50% - 8px);
+      width: 16px;
+      height: 16px;
       opacity: 0.3;
     }
     75% {
-      left: -12px;
-      top: -12px;
+      left: calc(50% - 12px);
+      top: calc(50% - 12px);
       width: 24px;
       height: 24px;
     }
 
     100% {
-      left: -12px;
-      top: -12px;
+      left: calc(50% - 12px);
+      top: calc(50% - 12px);
       width: 24px;
       height: 24px;
       opacity: 0;
