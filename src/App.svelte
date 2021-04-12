@@ -2,13 +2,11 @@
   import AnimeList from "./components/AnimeList.svelte";
   import Controls from "./components/Controls.svelte";
   import LoadingScreen from "./components/LoadingScreen.svelte";
-  import Meta from "./meta/Meta.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
 </script>
 
-<Meta />
+<GlobalStyles />
 <main>
-  <GlobalStyles />
   <section>
     <h1>What am I watching?</h1>
     <Controls />
