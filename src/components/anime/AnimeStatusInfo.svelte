@@ -19,9 +19,9 @@
 </script>
 
 <div class={`status`}>
-  <span class="dot" style={`color: ${color}`} />Episode {data.nextAiringEpisode
-    .episode}/{data.episodes ? data.episodes : "??"}:&nbsp;
-  <span class="time">{timeTillAiring.days}d {timeTillAiring.hour}h</span>
+  <span class="dot" style={`color: ${color}`} />Current {data.nextAiringEpisode
+    .episode - 1}/{data.episodes ? data.episodes : "??"}&nbsp|&nbsp;
+  <span class="time">Next: {timeTillAiring.days}d {timeTillAiring.hour}h</span>
 </div>
 
 <style lang="scss">

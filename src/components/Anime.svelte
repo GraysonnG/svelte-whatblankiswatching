@@ -40,7 +40,7 @@
       <span>
         <a href={data.siteUrl} target="_blank">{data.title.romaji}</a>
         <hr />
-        <div class="studio" href="#">
+        <div class="studio">
           {#each studios as studio (studio.id)}
             <a href={studio.siteUrl} target="_blank">
               <Badge color={data.coverImage.color}>
