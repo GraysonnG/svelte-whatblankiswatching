@@ -17,7 +17,7 @@
     close();
   };
 
-  const open = () => {
+  const handleInteraction = () => {
     showSuggestions = suggestions.length > 0;
   };
 
@@ -32,7 +32,13 @@
 </script>
 
 <div {id} use:clickOutside on:click_outside={handleClickOutside}>
-  <input {placeholder} on:focus={open} bind:value type="text" />
+  <input
+    {placeholder}
+    on:focus={handleInteraction}
+    on:change={handleInteraction}
+    bind:value
+    type="text"
+  />
   <span on:click={clear} />
   {#if showSuggestions}
     <div class="suggestions">
