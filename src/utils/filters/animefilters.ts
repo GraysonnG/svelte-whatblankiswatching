@@ -11,6 +11,10 @@ export const filterTitle = (anime: AnilistAnime, text: string) => {
     .includes(text.toLowerCase());
 };
 
+export const filterStudios = (anime: AnilistAnime, text: string) => {
+  return anime.studios.edges.filter(edge => edge.isMain).find(studio => studio.node.name.toLowerCase().includes(text.toLowerCase()))
+}
+
 export const filterTitleStartsWith = (anime: AnilistAnime, text: string) => {
   return anime.title.romaji
     .toLowerCase()
@@ -38,9 +42,13 @@ export const filterSeason = (anime: AnilistAnime, season: string) => {
   return anime.season.toString().toLowerCase().includes(season.toLowerCase());
 };
 
+export const filterText = (anime: AnilistAnime, text: string) => {
+  return filterTitle(anime, text) || filterStudios(anime, text)
+}
+
 export const filterList = (list: AnilistAnime[], filters: Filters) => {
   return list
-    .filter((anime) => filterTitle(anime, filters.text))
+    .filter((anime) => filterText(anime, filters.text))
     .filter((anime) => filterCurrent(anime, filters.current))
     .filter((anime) => filterYear(anime, filters.year))
     .filter((anime) => filterSeason(anime, filters.season));
