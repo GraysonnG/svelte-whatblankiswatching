@@ -30,6 +30,7 @@
     @media only screen and (max-width: 581px) {
       padding: 2em 0.5em;
       margin-top: 3em;
+      padding-bottom: 0.5em;
     }
   }
 
@@ -37,6 +38,7 @@
     width: calc(1200px + 4em);
     max-width: 100%;
     margin: 0 auto;
+    margin-bottom: 25vh;
   }
 
   h1 {

@@ -55,7 +55,7 @@
       use:clickOutside
       on:click_outside={handleBlurInfo}
     >
-      <Image src={data.coverImage.large} alt={data.title.romaji} />
+      <!-- <Image src={data.coverImage.large} alt={data.title.romaji} /> -->
       <section>
         <span>
           <div>

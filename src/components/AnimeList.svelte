@@ -40,6 +40,7 @@
     gap: 1em;
     box-sizing: border-box;
     padding: 1em 0;
+    padding-bottom: 0;
 
     @media only screen and (max-width: 581px) {
       grid-template-columns: 1fr;
