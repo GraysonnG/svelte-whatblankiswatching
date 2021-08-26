@@ -1,8 +1,24 @@
+:root {
+  --bg-color: #001220;
+
+  --wave-1-h: 278;
+  --wave-2-h: 274;
+  --wave-3-h: 269;
+  --wave-4-h: 265;
+  --wave-5-h: 258;
+
+  --wave-1-color: hsl(var(--wave-1-h), 94%, 70%);
+  --wave-2-color: hsl(var(--wave-2-h), 81%, 64%);
+  --wave-3-color: hsl(var(--wave-3-h), 71%, 57%);
+  --wave-4-color: hsl(var(--wave-4-h), 64%, 52%);
+  --wave-5-color: hsl(var(--wave-5-h), 69%, 46%);
+}
+
+
 html {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	background-color: #000;
 }
 
 body {
@@ -25,10 +41,6 @@ body::before, body::after {
 	z-index: -1;
 	filter: blur(10px);
 	background-size: cover;
-}
-
-body::after {
-	background-image: url("./img/wp-1.jpg");
 }
 
 a {

@@ -3,6 +3,7 @@
   import Controls from "./components/Controls.svelte";
   import LoadingScreen from "./components/LoadingScreen.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
+  import BackgroundWave from "./components/BackgroundWave.svelte";
 </script>
 
 <GlobalStyles />
@@ -14,6 +15,7 @@
   </section>
   <LoadingScreen />
 </main>
+<BackgroundWave />
 
 <style lang="scss">
   section {
