@@ -37,7 +37,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, max(450px, 49%));
     justify-content: center;
-    gap: 0.5em;
+    gap: 1em;
     box-sizing: border-box;
     padding: 1em 0;
 

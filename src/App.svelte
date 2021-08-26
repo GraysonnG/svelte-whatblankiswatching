@@ -19,7 +19,8 @@
 
 <style lang="scss">
   section {
-    background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, transparent 40em);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     padding: 2em;
     border-radius: 1em;
