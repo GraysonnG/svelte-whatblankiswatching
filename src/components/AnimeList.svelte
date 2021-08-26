@@ -3,8 +3,9 @@
   import { animeStore } from "../store/animeStore";
   import { filterList } from "../utils/filters/animefilters";
   import type { AnilistAnime } from "../types/anilist";
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { init, sort } from "../store/actions/animeActions";
+  import { getGenres } from "../utils/genrehelper";
 
   let anilist: AnilistAnime[];
 
@@ -15,6 +16,10 @@
   onMount(async () => {
     await init();
     await sort();
+  });
+
+  afterUpdate(() => {
+    console.log(getGenres());
   });
 </script>
 
@@ -30,9 +35,9 @@
   div {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 275px);
+    grid-template-columns: repeat(auto-fill, max(450px, 49%));
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
     box-sizing: border-box;
     padding: 1em 0;
 

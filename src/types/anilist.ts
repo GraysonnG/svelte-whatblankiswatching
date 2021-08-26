@@ -17,6 +17,7 @@ export interface AnilistAnime {
   title: {
     romaji: string;
   };
+  description: string;
   season: Season;
   seasonYear: number;
   startDate: {

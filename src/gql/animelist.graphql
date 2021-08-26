@@ -11,6 +11,7 @@ query {
           title {
             romaji
           }
+          description
           siteUrl
           season
           seasonYear

@@ -8,11 +8,11 @@
   let thisImage;
 
   onMount(() => {
-    thisImage.onload = () => {
+    thisImage.addEventListener("load", () => {
       setTimeout(() => {
         loaded = true;
-      }, 100);
-    };
+      }, 150);
+    })
   });
 
   onDestroy(() => {
@@ -28,7 +28,7 @@
     width: 100%;
     opacity: 0;
     object-fit: cover;
-    transition: all 500ms;
+    transition: all 500ms ease;
 
     &.loaded {
       opacity: 1;

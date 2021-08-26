@@ -19,29 +19,26 @@
 </script>
 
 <div class={`status`}>
-  <span class="dot" style={`color: ${color}`} />Current {data.nextAiringEpisode
-    .episode - 1}/{data.episodes ? data.episodes : "??"}&nbsp|&nbsp;
-  <span class="time">Next: {timeTillAiring.days}d {timeTillAiring.hour}h</span>
+  <span class="dot" style={`color: ${color}`} />
+  <!-- <div class="text">
+    Current {data.nextAiringEpisode.episode - 1}/{data.episodes
+      ? data.episodes
+      : "??"}&nbsp|&nbsp;
+    <span class="time">Next: {timeTillAiring.days}d {timeTillAiring.hour}h</span
+    >
+  </div> -->
 </div>
 
 <style lang="scss">
   .status {
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: white;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 1em;
-    margin: 0.5em;
-    padding: 0.25em;
-    padding-right: 0.5em;
+    border-radius: 50%;
     box-sizing: border-box;
-    font-size: 0.8em;
-    line-height: 1;
     font-weight: bold;
-    z-index: 2;
 
     .dot {
       position: relative;
@@ -50,7 +47,6 @@
       box-sizing: border-box;
       width: 12px;
       height: 12px;
-      margin-right: 0.5em;
       border-radius: 50%;
       border: 2px solid white;
       box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 0.8);

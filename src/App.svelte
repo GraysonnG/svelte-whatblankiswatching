@@ -23,7 +23,6 @@
     border-radius: 1em;
     margin-top: 8em;
     transition: height 300ms;
-    overflow: hidden;
 
     @media only screen and (max-width: 581px) {
       padding: 2em 0.5em;
@@ -32,7 +31,7 @@
   }
 
   main {
-    width: calc(1500px + 4em);
+    width: calc(1200px + 4em);
     max-width: 100%;
     margin: 0 auto;
   }
