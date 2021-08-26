@@ -1,11 +1,14 @@
 <script lang="ts">
+	import mobile from "is-mobile";
+
 
 	let svg1: SVGElement;
 
 	const handleLoad = () => {
 		const reducedMotionPreferred = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const isMobile = mobile();
 
-		if (!reducedMotionPreferred || !reducedMotionPreferred.matches) {
+		if (!isMobile && (!reducedMotionPreferred || !reducedMotionPreferred.matches)) {
 			for (let i = 1; i <= 5; i++) {
 				const tween = KUTE.fromTo(
 					`#start${i}`,
