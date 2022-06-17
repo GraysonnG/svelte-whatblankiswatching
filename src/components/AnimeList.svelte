@@ -35,11 +35,11 @@
   div {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, max(450px, 49%));
+    grid-template-columns: repeat(auto-fill, max(250px, 23%));
     justify-content: center;
-    gap: 1em;
+    gap: 1.5em;
     box-sizing: border-box;
-    padding: 1em 0;
+    padding: 2em 0;
     padding-bottom: 0;
 
     @media only screen and (max-width: 581px) {

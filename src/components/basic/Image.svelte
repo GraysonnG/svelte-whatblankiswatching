@@ -3,8 +3,8 @@
 
   export let src: string;
   export let alt: string;
-
-  let loaded = false;
+  export let loaded = false;
+  
   let thisImage;
 
   onMount(() => {
