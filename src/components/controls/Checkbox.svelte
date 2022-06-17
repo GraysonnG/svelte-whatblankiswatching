@@ -24,9 +24,8 @@
 
   div.checkbox {
     display: block;
-    border-radius: 0.5em;
     background: transparent;
-    border: 1px solid white;
+    border-bottom: 1px solid white;
     color: white;
     padding: 0.7em;
     align-items: center;
@@ -63,7 +62,6 @@
 
     &::after {
       border: 1px solid white;
-      border-radius: 0.3em;
     }
 
     &:hover {

@@ -10,6 +10,18 @@ $skew: 0deg;
   transition: all 150ms;
   border-bottom: 2px solid var(--card-bg-color);
 
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: scale(0.98);
+    background-color: var(--card-bg-color);
+    outline: 2px solid var(--card-bg-color);
+    outline-offset: 4px;
+    filter: blur(0.25em);
+    z-index: 0;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -24,6 +36,10 @@ $skew: 0deg;
     z-index: 1000;
     outline-offset: 4px;
     outline: 2px solid var(--card-bg-color);
+
+    &::before {
+      transform: scale(1.01);
+    }
 
     .tone {
       opacity: 0;

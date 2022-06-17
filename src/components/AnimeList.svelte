@@ -6,6 +6,7 @@
   import { afterUpdate, onMount } from "svelte";
   import { init, sort } from "../store/actions/animeActions";
   import { getGenres } from "../utils/genrehelper";
+  import { fade } from "svelte/transition";
 
   let anilist: AnilistAnime[];
 
@@ -23,16 +24,19 @@
   });
 </script>
 
-<div>
+<div class="list">
   {#if !$animeStore.loading}
     {#each anilist as anime (`${anime.id}-${anime.title.romaji}`)}
+    <div transition:fade={{duration: 150}}>
       <Anime data={anime} />
+    </div>
+    <!-- <Anime data={anime} /> -->
     {/each}
   {/if}
 </div>
 
 <style lang="scss">
-  div {
+  .list {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, max(250px, 23%));

@@ -67,7 +67,6 @@
     box-sizing: border-box;
     padding: 1em 0.5em;
     padding-top: 0.5em;
-    border-radius: 0.5em;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     max-width: calc(100% - 1em);

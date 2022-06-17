@@ -1,11 +1,17 @@
 <style lang="scss">
+  :global(body) {
+    background-color: rgba(35,35,35);
+    padding: 0;
+    margin: 0;
+  }
+
   :global(input),
   :global(select) {
     display: block;
-    border-radius: 0.5em;
     background: none;
     background-color: transparent;
-    border: 1px solid white;
+    border: none;
+    border-bottom: 1px solid white;
     color: white;
     padding: 0.7em;
   }

@@ -65,8 +65,7 @@ input, button, select, textarea {
 	-webkit-padding: 0.4em 0;
 	padding: 0.4em;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+	border-bottom: 1px solid #ccc;
 }
 
 input:disabled {
