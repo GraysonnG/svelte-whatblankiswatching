@@ -4,7 +4,7 @@ $skew: 0deg;
 
 .card {
   position: relative;
-  aspect-ratio: 8/15;
+  aspect-ratio: 8/13;
   padding: 2.5em 0;
   box-sizing: border-box;
   transition: all 150ms;
@@ -14,7 +14,7 @@ $skew: 0deg;
     content: "";
     position: absolute;
     inset: 0;
-    transform: scale(0.98);
+    transform: scale(0.8);
     background-color: var(--card-bg-color);
     outline: 2px solid var(--card-bg-color);
     outline-offset: 4px;
@@ -32,7 +32,7 @@ $skew: 0deg;
   }
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     z-index: 1000;
     outline-offset: 4px;
     outline: 2px solid var(--card-bg-color);

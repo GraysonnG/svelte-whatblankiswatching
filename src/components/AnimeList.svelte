@@ -3,9 +3,8 @@
   import { animeStore } from "../store/animeStore";
   import { filterList } from "../utils/filters/animefilters";
   import type { AnilistAnime } from "../types/anilist";
-  import { afterUpdate, onMount } from "svelte";
+  import { onMount } from "svelte";
   import { init, sort } from "../store/actions/animeActions";
-  import { getGenres } from "../utils/genrehelper";
   import { fade } from "svelte/transition";
 
   let anilist: AnilistAnime[];
@@ -17,10 +16,6 @@
   onMount(async () => {
     await init();
     await sort();
-  });
-
-  afterUpdate(() => {
-    console.log(getGenres());
   });
 </script>
 

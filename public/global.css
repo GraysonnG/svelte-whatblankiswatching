@@ -21,6 +21,20 @@ html {
 	height: 100%;
 }
 
+html::after {
+	content: "";
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 50vh;
+	background: black;
+	-webkit-mask-image: url("./img/tone.png");
+	mask-image: url("./img/tone.png");
+	-webkit-mask-repeat: repeat-x;
+	mask-repeat: repeat-x;
+}
+
 body {
 	color: #f4f4f4;
 	margin: 0;

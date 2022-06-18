@@ -29,13 +29,18 @@
 <!-- <BackgroundWave /> -->
 
 <style lang="scss">
+  @use "./styles/components/header";
+
   section {
+    position: relative;
     box-sizing: border-box;
     padding: 2em;
     border-radius: 1em;
     margin-top: 8em;
     transition: height 300ms;
     padding-bottom: 15vh;
+    z-index: 100;
+    min-height: 90vh;
 
     @media only screen and (max-width: 581px) {
       padding: 2em 0.5em;
@@ -58,45 +63,6 @@
     font-size: 32px;
   }
 
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: translateY(2px);
-      background: linear-gradient(90deg, magenta, cyan);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: translateY(2px);
-      background: linear-gradient(90deg, magenta, cyan);
-      filter: blur(0.5em);
-    }
-
-    .wrapper {
-      position: relative;
-      background-color: black;
-      z-index: 1;
-      padding: 1em;
-      padding-top: 2em;
-      padding-bottom: 0.5em;
-    }
-  }
   ul {
       position: relative;
       z-index: 1;

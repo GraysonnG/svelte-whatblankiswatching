@@ -62,6 +62,8 @@
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
     grid-template-areas: "search year season current";
     gap: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
 
     @media only screen and (max-width: 800px) {
       grid-template-areas:
