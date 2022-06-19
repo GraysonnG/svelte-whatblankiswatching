@@ -30,6 +30,7 @@
 
 <style lang="scss">
   @use "./styles/components/header";
+  @use "./styles/abstracts" as *;
 
   section {
     position: relative;
@@ -42,9 +43,9 @@
     z-index: 100;
     min-height: 90vh;
 
-    @media only screen and (max-width: 581px) {
+    @include viewport-small {
       padding: 2em 0.5em;
-      margin-top: 3em;
+      margin-top: 16em;
       padding-bottom: 0.5em;
     }
   }
@@ -63,6 +64,10 @@
     font-size: 32px;
   }
 
+  footer {
+    max-width: 100vw;
+  }
+
   ul {
       position: relative;
       z-index: 1;
@@ -70,9 +75,17 @@
       margin: 0;
       padding: 1em 2em;
       display: flex;
-      width: 100%;
+      flex-wrap: wrap;
+      width: 100vw;
       justify-content: space-around;
       background-color: black;
+      box-sizing: border-box;
+
+      @include viewport-small {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+      }
 
       li {
         margin: 0;
