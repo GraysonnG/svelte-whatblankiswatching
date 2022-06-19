@@ -1,9 +1,19 @@
+@use "../abstracts" as *;
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   z-index: 10000;
+  transition: transform 150ms;
+  transform-origin: top;
+
+  @include viewport-small {
+    &.hide {
+      transform: scaleY(0);
+    }
+  }
   
   &::before {
     content: "";
