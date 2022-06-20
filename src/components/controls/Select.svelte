@@ -5,7 +5,7 @@
 </script>
 
 <div {id}>
-  <select {disabled} bind:value>
+  <select {disabled} class:disabled bind:value>
     <slot />
   </select>
 </div>
@@ -17,6 +17,10 @@
     > select {
       width: 100%;
       height: 100%;
+
+      &:disabled {
+        opacity: 0.5;
+      }
     }
 
     &::after {
