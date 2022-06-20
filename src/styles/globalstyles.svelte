@@ -24,10 +24,6 @@
     appearance: none;
   }
 
-  :global(select)[disabled=""] {
-    opacity: 0.5;
-  }
-
   :global(label) {
     user-select: none;
   }

@@ -28,7 +28,7 @@
     box-sizing: border-box;
     padding: 2em;
     border-radius: 1em;
-    margin-top: 8em;
+    margin-top: 10em;
     transition: height 300ms;
     padding-bottom: 15vh;
     z-index: 100;
@@ -60,7 +60,7 @@
     padding: 1em 2em;
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 100%;
     justify-content: space-around;
     background-color: black;
     box-sizing: border-box;
