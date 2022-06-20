@@ -19,16 +19,15 @@
   });
 </script>
 
-<div class="list">
+<ul class="list">
   {#if !$animeStore.loading}
     {#each anilist as anime (`${anime.id}-${anime.title.romaji}`)}
-    <div transition:fade={{duration: 150}}>
+    <li transition:fade={{duration: 150}}>
       <Anime data={anime} />
-    </div>
-    <!-- <Anime data={anime} /> -->
+    </li>
     {/each}
   {/if}
-</div>
+</ul>
 
 <style lang="scss">
   .list {
@@ -40,6 +39,8 @@
     box-sizing: border-box;
     padding: 2em 0;
     padding-bottom: 0;
+    list-style: none;
+    margin: 0;
 
     @media only screen and (max-width: 581px) {
       grid-template-columns: 1fr;

@@ -75,6 +75,8 @@
     width: fit-content;
     z-index: 10;
     left: 0.5em;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   span {

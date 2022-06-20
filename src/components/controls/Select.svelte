@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let disabled;
+  export let disabled = false;
   export let value;
   export let id;
 </script>

@@ -46,18 +46,6 @@ body {
 	position: relative;
 }
 
-body::before, body::after {
-	content: "";
-	position: fixed;
-	display: block;
-	left: 0;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: -1;
-	background-size: cover;
-}
-
 a {
 	color: rgb(0,100,200);
 	text-decoration: none;
