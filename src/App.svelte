@@ -3,6 +3,25 @@
   import LoadingScreen from "./components/LoadingScreen.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
   import Header from "./components/basic/Header.svelte";
+  import Footer from "./components/basic/Footer.svelte";
+  import { onMount } from "svelte";
+  import { animeStore } from "./store/animeStore";
+
+  onMount(() => {
+    window.onscroll = (ev) => {
+
+      setTimeout(() => {
+        const scrollPos = document.documentElement.scrollTop + window.innerHeight
+        const scrollHeight = document.body.scrollHeight
+
+        animeStore.update(state => {
+          state.hideTop = !(scrollPos <= window.innerHeight + 150)
+          state.hideBottom = !(scrollHeight - scrollPos <= 300)
+          return state
+        })
+      }, 10)
+    }
+  })
 </script>
 
 <GlobalStyles />
@@ -11,12 +30,7 @@
   <section>
     <AnimeList />
   </section>
-  <footer>
-    <ul>
-      <li><a target="_blank" href="https://blanktheevil.com">Professional Portfolio</a></li>
-      <li><a target="_blank" href="https://anilist.co">Anilist</a></li>
-    </ul>
-  </footer>
+  <Footer />
   <LoadingScreen />
 </main>
 
@@ -28,17 +42,17 @@
     box-sizing: border-box;
     padding: 2em;
     border-radius: 1em;
-    margin-top: 10em;
     transition: height 300ms;
-    padding-bottom: 15vh;
+    padding-bottom: 10em;
+    padding-top: 10em;
     z-index: 100;
     min-height: 90vh;
 
-    @include viewport-small {
+    @media only screen and (max-width: 800px) {
       position: sticky;
       padding: 2em 0.5em;
-      margin-top: 16em;
-      padding-bottom: 0.5em;
+      padding-top: 18em;
+      padding-bottom: 10em;
     }
   }
 
@@ -48,36 +62,5 @@
     margin: 0 auto;
   }
 
-  footer {
-    max-width: 100vw;
-  }
-
-  ul {
-    position: relative;
-    z-index: 1;
-    list-style: none;
-    margin: 0;
-    padding: 1em 2em;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-around;
-    background-color: black;
-    box-sizing: border-box;
-
-    @include viewport-small {
-      flex-direction: column;
-      align-items: center;
-      gap: 1em;
-    }
-
-    li {
-      margin: 0;
-      padding: 0;
-
-      a {
-        color: white;
-      }
-    }
-  }
+  
 </style>

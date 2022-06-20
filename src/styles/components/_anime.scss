@@ -73,6 +73,7 @@ $skew: 0deg;
     top: 0;
     height: 100%;
     z-index: 2;
+    transition: all 0ms;
 
     &::after {
       content: "";

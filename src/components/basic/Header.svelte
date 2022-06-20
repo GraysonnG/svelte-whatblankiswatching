@@ -1,36 +1,26 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { isSmallViewport } from "../../utils/displayhelper";
+  import { animeStore } from "../../store/animeStore";
   import Controls from "../Controls.svelte";
   import EvaIcon from "./EvaIcon.svelte";
-
-  let header;
-  let hide = false
-
+  
   const onMenuClicked = () => {
-    hide = false;
+    animeStore.update(state => {
+      state.hideTop = false
+      return state
+    })
   }
-
-  onMount(() => {
-    window.onscroll = () => {
-      const scrollPos = window.pageYOffset
-      hide = (scrollPos >= 114)
-    }
-  })
 </script>
 
-<header bind:this={header} class:hide >
+<header class:hide={$animeStore.hideTop} >
   <div class="wrapper">
     <h1>What am I watching?</h1>
     <Controls />
   </div>
 </header>
 
-{#if isSmallViewport()}
-  <div class="menu" class:hide on:click={onMenuClicked}>
-    <EvaIcon name="menu" size={48} />
-  </div>
-{/if}
+<div class="menu" class:hide={$animeStore.hideTop} on:click={onMenuClicked}>
+  <EvaIcon name="menu" size={48} />
+</div>
 
 <style lang="scss">
   @use "../../styles/components/header";
@@ -47,7 +37,7 @@
     position: fixed;
     left: 0.25em;
     top: -10em;
-    z-index: 10001;
+    z-index: 9999;
     transition: top 150ms;
     background-color: black;
 

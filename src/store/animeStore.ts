@@ -12,12 +12,16 @@ export interface AnimeStore {
   anilist: AnilistAnime[];
   filters: Filters;
   loading: boolean;
+  hideTop: boolean;
+  hideBottom: boolean;
   years: number[];
   seasons: Season[];
 }
 
 export const animeStore = writable<AnimeStore>({
   loading: true,
+  hideTop: false,
+  hideBottom: true,
   anilist: [],
   filters: {
     text: "",
@@ -28,3 +32,4 @@ export const animeStore = writable<AnimeStore>({
   years: [],
   seasons: []
 })
+

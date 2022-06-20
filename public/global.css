@@ -14,6 +14,10 @@
   --wave-5-color: hsl(var(--wave-5-h), 69%, 46%);
 }
 
+* {
+	box-sizing: border-box;
+}
+
 
 html {
 	position: relative;
@@ -35,6 +39,8 @@ html::after {
 	mask-repeat: repeat-x;
 	-webkit-mask-size: contain;
 	mask-size: contain;
+	-webkit-mask-position-y: bottom;
+	mask-position: bottom;
 }
 
 body {

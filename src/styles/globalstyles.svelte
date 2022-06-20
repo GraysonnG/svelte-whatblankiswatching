@@ -1,6 +1,6 @@
 <style lang="scss">
   :global(body) {
-    background-color: rgba(35,35,35);
+    background-color: rgba(15,15,15);
     padding: 0;
     margin: 0;
   }
