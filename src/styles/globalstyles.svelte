@@ -11,7 +11,7 @@
     background: none;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid white;
     color: white;
     padding: 0.7em;
   }

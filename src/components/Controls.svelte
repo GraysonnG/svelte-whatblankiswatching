@@ -5,9 +5,9 @@
     filterTitleStartsWith,
   } from "../utils/filters/animefilters";
   import { sortByTitle } from "../utils/listsorters";
-  import { toProperCase } from "../utils/seasonhelper";
   import Checkbox from "./controls/Checkbox.svelte";
   import Search from "./controls/Search.svelte";
+  import SeasonSelector from "./controls/SeasonSelector.svelte";
   import Select from "./controls/Select.svelte";
 
   let disableSeason;
@@ -40,16 +40,7 @@
     {/each}
   </Select>
 
-  <Select
-    disabled={disableSeason}
-    bind:value={$animeStore.filters.season}
-    id="season"
-  >
-    <option value="">Select Season...</option>
-    {#each $animeStore.seasons as season}
-      <option value={season}>{toProperCase(season)}</option>
-    {/each}
-  </Select>
+  <SeasonSelector bind:value={$animeStore.filters.season} disabled={disableSeason} />
 
   <Checkbox bind:checked={$animeStore.filters.current} id="current">
     Show currently airing...
