@@ -79,6 +79,12 @@
       outline: 2px solid var(--anime-color);
       outline-offset: 4px;
 
+      @include viewport-small {
+        aspect-ratio: unset;
+        width: calc(100% - 1em);
+        height: calc(100% - 1em);
+      }
+
       .content {
         position: absolute;
         left: 0;
@@ -143,6 +149,10 @@
         mask-image: url("../img/tone.png");
         -webkit-mask-size: contain;
         mask-size: contain;
+        -webkit-mask-position-y: bottom;
+        mask-position: bottom;
+        -webkit-mask-repeat-y: no-repeat;
+        mask-repeat: repeat no-repeat;
         z-index: 1;
       }
 
