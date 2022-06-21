@@ -3,6 +3,7 @@
   import Image from "./basic/Image.svelte";
   import { addObserver, removeObserver } from "../store/intersectionObserverStore";
   import { onDestroy, onMount } from "svelte";
+  import { animeStore } from "../store/animeStore";
 
   export let data: AnilistAnime;
   let element;
@@ -19,15 +20,23 @@
     removeObserver(element)
   })
 
+  const onSelect = () => {
+    animeStore.update(state => {
+      state.modalAnime = data
+      return state
+    })
+  }
+
 </script>
 
 <div
   style={`--card-bg-color: ${data.coverImage.color || "white"};`}
   class="card"
   class:img-loaded={imageLoaded}
+  on:click={onSelect}
   bind:this={element}>
   {#if visible}
-    <h3><a href={data.siteUrl} target="_blank">{data.title.romaji}</a></h3>
+    <h3>{data.title.romaji}</h3>
     <div class="corner" class:current={!!data.nextAiringEpisode}>
 
     </div>

@@ -13,6 +13,7 @@ export interface AnimeStore {
   filters: Filters;
   loading: boolean;
   hideTop: boolean;
+  modalAnime: AnilistAnime | null;
   hideBottom: boolean;
   years: number[];
   seasons: Season[];
@@ -23,6 +24,7 @@ export const animeStore = writable<AnimeStore>({
   hideTop: false,
   hideBottom: true,
   anilist: [],
+  modalAnime: null,
   filters: {
     text: "",
     year: "",

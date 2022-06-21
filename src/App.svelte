@@ -6,6 +6,7 @@
   import Footer from "./components/basic/Footer.svelte";
   import { onMount } from "svelte";
   import { animeStore } from "./store/animeStore";
+  import AnimeModal from "./components/AnimeModal.svelte";
 
   onMount(() => {
     window.onscroll = (ev) => {
@@ -31,6 +32,7 @@
     <AnimeList />
   </section>
   <Footer />
+  <AnimeModal />
   <LoadingScreen />
 </main>
 
