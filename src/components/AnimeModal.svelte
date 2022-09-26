@@ -39,14 +39,14 @@
 </script>
 
 {#if $animeStore.modalAnime !== null}
-  <section transition:fade={{duration: 500}}>
+  <section out:fade={{duration: 200, delay: 200}}>
     <div
       class="card"
       use:clickOutside
       on:click_outside={closeModal}
       style={`--anime-color:${$animeStore.modalAnime.coverImage.color || "white"}`}
       in:receive={{ key: $animeStore.modalAnime.siteUrl }}
-      out:zoom={{duration: 500}}
+      out:zoom={{duration: 400}}
       >
       <div class="content">
         <h2>
