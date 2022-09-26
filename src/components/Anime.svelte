@@ -4,6 +4,9 @@
   import { addObserver, removeObserver } from "../store/intersectionObserverStore";
   import { onDestroy, onMount } from "svelte";
   import { animeStore } from "../store/animeStore";
+  import { simpleCrossFade } from "../utils/simpleCrossFade";
+
+  const [send, _] = simpleCrossFade
 
   export let data: AnilistAnime;
   let element;
@@ -21,6 +24,11 @@
   })
 
   const onSelect = () => {
+    send(element, {
+      duration: 200,
+      key: data.siteUrl
+    })
+
     animeStore.update(state => {
       state.modalAnime = data
       return state
