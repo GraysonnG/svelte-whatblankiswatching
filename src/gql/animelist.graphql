@@ -10,6 +10,7 @@ query {
           id
           title {
             romaji
+            english
           }
           description
           siteUrl

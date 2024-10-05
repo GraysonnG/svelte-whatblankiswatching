@@ -1,13 +1,14 @@
 @use "../abstracts/" as *;
 
 $skew: 0deg;
+$duration: 300ms;
 
 .card {
   position: relative;
   aspect-ratio: 8/13;
   padding: 2.5em 0;
   box-sizing: border-box;
-  transition: all 150ms;
+  transition: all $duration;
   border-bottom: 2px solid var(--card-bg-color);
 
   &::before {
@@ -19,7 +20,9 @@ $skew: 0deg;
     outline: 2px solid var(--card-bg-color);
     outline-offset: 4px;
     filter: blur(0.25em);
+    transition: all $duration;
     z-index: 0;
+    opacity: 0;
   }
 
   &::after {
@@ -39,6 +42,7 @@ $skew: 0deg;
 
     &::before {
       transform: scale(1.01);
+      opacity: 1;
     }
 
     .tone {
@@ -125,7 +129,7 @@ $skew: 0deg;
     height: 25%;
     top: 0;
     opacity: 1;
-    transition: all 150ms;
+    transition: all $duration;
     transform: rotate(180deg);
     background-color: var(--card-bg-color);
     -webkit-mask-image: url("../img/tone.png");

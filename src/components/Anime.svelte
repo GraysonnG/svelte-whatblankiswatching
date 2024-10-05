@@ -44,7 +44,7 @@
   on:click={onSelect}
   bind:this={element}>
   {#if visible}
-    <h3>{data.title.romaji}</h3>
+    <h3>{data.title.english}</h3>
     <div class="corner" class:current={!!data.nextAiringEpisode}>
 
     </div>

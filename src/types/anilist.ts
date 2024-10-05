@@ -16,6 +16,7 @@ export interface AnilistAnime {
   id: number;
   title: {
     romaji: string;
+    english: string;
   };
   description: string;
   season: Season;

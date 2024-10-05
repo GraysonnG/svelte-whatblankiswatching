@@ -59,7 +59,7 @@
   }
 
   main {
-    width: calc(1200px + 4em);
+    width: calc(1600px + 4em);
     max-width: 100%;
     margin: 0 auto;
   }

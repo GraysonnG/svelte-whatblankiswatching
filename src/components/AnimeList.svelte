@@ -33,11 +33,11 @@
   .list {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, max(250px, 23%));
+    grid-template-columns: repeat(auto-fill, max(200px, 15%));
     justify-content: center;
-    gap: 1.5em;
+    gap: 1em;
     box-sizing: border-box;
-    padding: 2em 0;
+    padding: 4em 0;
     padding-bottom: 0;
     list-style: none;
     margin: 0;
