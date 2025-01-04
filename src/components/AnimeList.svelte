@@ -22,9 +22,7 @@
 <ul class="list">
   {#if !$animeStore.loading}
     {#each anilist as anime (`${anime.id}-${anime.title.romaji}`)}
-    <li transition:fade={{duration: 150}}>
       <Anime data={anime} />
-    </li>
     {/each}
   {/if}
 </ul>

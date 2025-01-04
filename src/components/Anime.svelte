@@ -40,11 +40,12 @@
 <div
   style={`--card-bg-color: ${data.coverImage.color || "white"};`}
   class="card"
+  class:visible
   class:img-loaded={imageLoaded}
   on:click={onSelect}
   bind:this={element}>
   {#if visible}
-    <h3>{data.title.english}</h3>
+    <h3>{data.title.english || data.title.romaji}</h3>
     <div class="corner" class:current={!!data.nextAiringEpisode}>
 
     </div>

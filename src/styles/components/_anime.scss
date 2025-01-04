@@ -11,7 +11,7 @@ $duration: 300ms;
   transition: all $duration;
   border-bottom: 2px solid var(--card-bg-color);
 
-  &::before {
+  &.visible::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -25,7 +25,7 @@ $duration: 300ms;
     opacity: 0;
   }
 
-  &::after {
+  &.visible::after {
     content: "";
     position: absolute;
     inset: 0;
