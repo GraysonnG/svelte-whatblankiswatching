@@ -18,7 +18,7 @@ export const getAnimeDate = (anime: AnilistAnime) => {
 }
 
 export const getUniqueYears = (list: AnilistAnime[]) => {
-  return [...new Set(list.map(info => info.seasonYear))].sort(
+  return [...new Set(list.map(info => info.seasonYear || info.startDate.year))].sort(
     (a, b) => {
       if (a > b) return -1;
       if (a < b) return 1;

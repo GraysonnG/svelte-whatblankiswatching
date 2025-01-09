@@ -3,10 +3,10 @@
   import LoadingScreen from "./components/LoadingScreen.svelte";
   import GlobalStyles from "./styles/globalstyles.svelte";
   import Header from "./components/basic/Header.svelte";
-  import Footer from "./components/basic/Footer.svelte";
   import { onMount } from "svelte";
   import { animeStore } from "./store/animeStore";
   import AnimeModal from "./components/AnimeModal.svelte";
+  import SideScrollView from "./components/controls/SideScrollView.svelte";
 
   onMount(() => {
     window.onscroll = (ev) => {
@@ -31,9 +31,9 @@
   <section>
     <AnimeList />
   </section>
-  <Footer />
   <AnimeModal />
   <LoadingScreen />
+  <SideScrollView />
 </main>
 
 <style lang="scss">

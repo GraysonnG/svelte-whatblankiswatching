@@ -21,7 +21,7 @@
       filterList([...it.anilist], it.filters)
         .filter((info) => filterTitleStartsWith(info, it.filters.text))
         .filter((info) => info.title.romaji !== it.filters.text)
-    ).map((ani) => ani.title.romaji);
+    ).map((ani) => (ani.title.english || ani.title.romaji));
   });
 </script>
 

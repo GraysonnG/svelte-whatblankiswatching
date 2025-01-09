@@ -47,7 +47,7 @@
       padding-top: 0.5em;
     }
 
-    &::before, &::after {
+    /* &::before, &::after {
       content: "";
       background: linear-gradient(90deg, magenta, cyan);
       width: 100%;
@@ -64,6 +64,6 @@
 
     &.hide {
       top: 0.5em;
-    }
+    } */
   }
 </style>

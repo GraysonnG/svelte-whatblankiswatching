@@ -3,10 +3,10 @@ import type { AnilistAnime } from "../../types/anilist";
 import { animeStartsWithinTwoWeeks } from "../datehelper";
 
 export const filterTitle = (anime: AnilistAnime, text: string) => {
-  if (anime.title.romaji === undefined) {
+  if ((anime.title.english || anime.title.romaji) === undefined) {
     return false
   }
-  return anime.title.romaji
+  return (anime.title.english || anime.title.romaji)
     .toLowerCase()
     .includes(text.toLowerCase());
 };
@@ -16,7 +16,7 @@ export const filterStudios = (anime: AnilistAnime, text: string) => {
 }
 
 export const filterTitleStartsWith = (anime: AnilistAnime, text: string) => {
-  return anime.title.romaji
+  return (anime.title.english || anime.title.romaji)
     .toLowerCase()
     .startsWith(text.toLowerCase());
 };
