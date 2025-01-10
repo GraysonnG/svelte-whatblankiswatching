@@ -14,7 +14,7 @@
     rotation: number;
   }
 
-  const enabled = true;
+  const enabled = false;
   const arrSize = 20;
   const listSpeed = 25;
   let visible = true;

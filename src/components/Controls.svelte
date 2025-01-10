@@ -6,6 +6,7 @@
   } from "../utils/filters/animefilters";
   import { sortByTitle } from "../utils/listsorters";
   import Checkbox from "./controls/Checkbox.svelte";
+  import Dropdown from "./controls/Dropdown.svelte";
   import Search from "./controls/Search.svelte";
   import SeasonSelector from "./controls/SeasonSelector.svelte";
   import Select from "./controls/Select.svelte";
@@ -33,12 +34,10 @@
     suggestions={searchSuggestions}
   />
 
-  <Select bind:value={$animeStore.filters.year} id="year">
-    <option value="">Select Year...</option>
-    {#each $animeStore.years as year}
-      <option value={year}>{year}</option>
-    {/each}
-  </Select>
+  <Dropdown 
+    onSelected={(value => $animeStore.filters.year = value.value)}
+    values={$animeStore.years.map(it => ({value: it.toString(), label: it.toString()}))}
+  />
 
   <SeasonSelector bind:value={$animeStore.filters.season} disabled={disableSeason} />
 
