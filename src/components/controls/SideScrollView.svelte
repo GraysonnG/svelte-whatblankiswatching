@@ -2,10 +2,12 @@
   import { onMount } from "svelte";
   import { animeStore } from "../../store/animeStore";
   import type { AnimeStore } from "../../store/animeStore";
+  import { isMobile } from "../../utils/mobilehelper";
 
   $: previewHeight = 0;
   $: previewPercent = 0;
   let hide = false;
+  let mobile = false;
 
   let elements: {
     year: number,
@@ -47,6 +49,11 @@
   }
 
   onMount(() => {
+    if (isMobile()) {
+      mobile = true;
+    }
+
+
     animeStore.subscribe((state) => {
       if (state.filters.year !== "") {
         hide = true;
@@ -80,6 +87,7 @@
   });
 </script>
 
+{#if !mobile}
 <div class="window-preview-container" class:hide>
   {#each elements as { year, y, h } (year)}
     <div class="window-card" style="top: {y}%; height: {h}%;" on:click={() => scrollTo(year)}>
@@ -87,6 +95,7 @@
     </div>
   {/each}
 </div>
+{/if}
 
 <style lang="scss">
   .hide {

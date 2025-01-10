@@ -13,7 +13,6 @@
 
 <header class:hide={$animeStore.hideTop} >
   <div class="wrapper">
-    <h1>What am I watching?</h1>
     <Controls />
   </div>
 </header>
@@ -24,15 +23,6 @@
 
 <style lang="scss">
   @use "../../styles/components/header";
-
-  h1 {
-    margin-top: 0;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-weight: 300;
-    font-size: 32px;
-  }
-
   .menu {
     position: fixed;
     left: 0.25em;
@@ -46,24 +36,5 @@
       padding: 0.25em 0.5em;  
       padding-top: 0.5em;
     }
-
-    /* &::before, &::after {
-      content: "";
-      background: linear-gradient(90deg, magenta, cyan);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: -2;
-      left: 0;
-      top: 3px;
-    }
-
-    &::after {
-      filter: blur(5px);
-    }
-
-    &.hide {
-      top: 0.5em;
-    } */
   }
 </style>

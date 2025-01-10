@@ -9,11 +9,11 @@
   :global(select) {
     display: block;
     background: none;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.4);
     border: none;
-    border-bottom: 2px solid white;
     color: white;
     padding: 0.7em;
+    border-radius: 0.5em;
   }
 
   :global(option) {

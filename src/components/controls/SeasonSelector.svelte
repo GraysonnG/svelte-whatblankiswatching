@@ -79,8 +79,8 @@
     width: 25%;
     height: 100%;
     background-color: rgba(255,255,255,0.3);
-    border-bottom: 2px solid white;
     transition: all 150ms;
+    border-radius: 0.25em;
   }
 </style>
 

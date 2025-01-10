@@ -49,8 +49,7 @@
     justify-content: center;
     gap: 1em;
     box-sizing: border-box;
-    /* padding: 4em 0; */
-    padding: 0;
+    padding: 0 1em;
     padding-bottom: 0;
     list-style: none;
     margin: 0;
@@ -60,20 +59,31 @@
     }
   }
 
+  div {
+    margin-bottom: 1em;
+    padding-block: 2em;
+    background-color: #111;
+    border-radius: 1em;
+    transition: all 500ms;
+    overflow-x: scroll;
+  }
+
+  div:hover {
+    background-color: #181818;
+
+    & h2 {
+      opacity: 1;
+    }
+  }
+
   h2 {
     display: block;
-    font-size: 1.5em;
+    font-size: 3rem;
     margin: 0 auto;
-    padding-inline: 2em;
-    padding-top: 2em;
-    padding-bottom: 0.5em;
-
-    &::after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: white;
-    }
+    padding-inline: 1em;
+    padding-bottom: 0.25em;
+    font-weight: 100;
+    opacity: 0.2;
+    transition: opacity 500ms;
   }
 </style>

@@ -46,10 +46,6 @@
   bind:this={element}>
   {#if visible}
     <h3>{data.title.english || data.title.romaji}</h3>
-    <div class="corner" class:current={!!data.nextAiringEpisode}>
-
-    </div>
-
     <!-- bg -->
     <div class="img-shadow">
       <div class="tone">

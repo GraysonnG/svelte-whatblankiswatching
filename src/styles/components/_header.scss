@@ -8,6 +8,7 @@ header {
   z-index: 10000;
   transition: transform 150ms;
   transform-origin: top;
+  box-shadow: 0 0 1em rgba($color: #000, $alpha: 0.5);
 
   @include viewport-small {
     &.hide {
@@ -17,10 +18,9 @@ header {
 
   .wrapper {
     position: relative;
-    background-color: black;
+    background-color: #111;
     z-index: 1;
     padding: 1em;
-    padding-top: 2em;
     padding-bottom: 1em;
   }
 }

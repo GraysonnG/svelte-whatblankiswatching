@@ -1,122 +1,150 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
-  import { ANILIST_CACHE_KEY } from "../utils/anilisthelper";
-  import { storedValueExpired } from "../utils/cachehelper";
-  import { animeStore } from "../store/animeStore";
+  import { AnilistAnime } from "../types/anilist";
+  import { AnimeStore, animeStore } from "../store/animeStore";
+  import Anime from "./Anime.svelte";
+  import { fade, scale } from "svelte/transition";
 
-  let percentage = 0;
-  let max = 90;
-  let animation;
-  let fadeOut = false;
+  type RandomPos = {
+    x: number;
+    y: number;
+    time: number;
+    scale: number;
+    opacity: number;
+    rotation: number;
+  }
+
+  const enabled = true;
+  const arrSize = 20;
+  const listSpeed = 25;
   let visible = true;
+  let loading = true;
+  let animeList: AnilistAnime[] = [];
+  let randomPos: RandomPos[];
 
-  const onFinish = () => {
-    fadeOut = true;
-    animation = cancelAnimationFrame(animation);
-    document.body.removeAttribute("style");
+  const getBiasedRandom = (i) => {
+    const aOrB = 50 + ((i % 2 ? 1 : -1) * 25);
+    return aOrB + (Math.random() > 0.5 ? 1 : -1) * (i * 2.5);
+  }
+
+  const setUpRandomPos = () => {
+    randomPos = Array.from({ length: arrSize }, (_, i) => ({
+      x: i < arrSize - 1 ? getBiasedRandom(i) : 50,
+      y: i < arrSize - 1 ? 25 + Math.floor(Math.random() * 50) : 50,
+      time: listSpeed,
+      scale: 0,
+      opacity: 0,
+      rotation: i < arrSize - 1 ? -10 + Math.floor(Math.random() * 20) : 0,
+    }));
+  }
+
+  const handleStartAnimations = (html: HTMLElement) => {
     setTimeout(() => {
-      visible = false;
+      loading = false;
+      randomPos.forEach((pos, i) => {
+        setTimeout(() => {
+          randomPos[i].opacity = 1
+          randomPos[i].scale = 1
+        }, 100 + (pos.time * i))
+      })
+
+      setTimeout(() => {
+        visible = false;
+        html.style.overflow = "auto";
+      }, (randomPos.length * listSpeed) + 1000);
     }, 500);
-  };
+  }
 
-  const animate = () => {
-    if (percentage < max) {
-      percentage += 3;
-    }
+  const setUpAnimeList = (state: AnimeStore) => {
+    const currentYear = new Date().getFullYear();
+    const recentAnime = state.anilist.filter(a => a.startDate.year === currentYear)
+    const recentAnimeSize = recentAnime.length
+    
+    // grab arrSize - 1 anime from the list at random
+    animeList = state.anilist.map(x => ({ x, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(a => a.x)
+      .slice(0, arrSize - 1);
 
-    if (percentage < 100) {
-      animation = requestAnimationFrame(() => {
-        animate();
-      });
+    if (recentAnimeSize > 0) {
+      // add one random anime from the current year
+      animeList.push(recentAnime[Math.floor(Math.random() * recentAnimeSize)])
     } else {
-      onFinish();
+      animeList.push(animeList[0])
     }
-  };
+  }
 
-  onMount(async () => {
-    if (!storedValueExpired(ANILIST_CACHE_KEY)) {
-      visible = false;
-    } else {
-      document.body.setAttribute("style", "overflow: hidden;");
-      percentage = 0;
-      animation = requestAnimationFrame(() => {
-        animate();
-      });
-    }
-  });
+  onMount(() => {
+    const html = document.getElementsByTagName("html")[0];
+    if (enabled) html.style.overflow = "hidden";
+    setUpRandomPos()
 
-  animeStore.subscribe((state) => {
-    if (!state.loading) {
-      max = 100;
-    }
+    animeStore.subscribe((state) => {
+      if (!enabled)visible = false
+      if (!state.loading && enabled) {
+        handleStartAnimations(html);
+        setUpAnimeList(state)
+      }
+    });
   });
 </script>
 
 {#if visible}
-  <div class="screen" class:fadeOut>
-    <h1>What<br />Blank</h1>
-    <span>Loading...</span>
-    <div class="bar-outer">
-      <div class="bar" style={`width: ${percentage}%;`} />
-    </div>
-    <h1>is<br />watching</h1>
+  <div class="loading-screen" out:fade={{duration: 1000}}>
+    {#if loading}
+      <h2>Loading...</h2>
+    {:else}
+      {#each animeList as anime, i}
+        <div class="anime-card" style="z-index: {randomPos[i].time};transform: rotate({randomPos[i].rotation}deg) translate(-50%, -50%) scale({randomPos[i].scale * 2}); opacity: {randomPos[i].opacity}; top: {randomPos[i].y}%; left: {randomPos[i].x}%;">
+          <Anime data={anime} />
+        </div>
+      {/each}
+    {/if}
   </div>
 {/if}
 
 <style lang="scss">
-  h1 {
-    text-align: right;
-    margin: 1rem;
-    font-size: 10em;
-    color: #1a1a1a;
-
-    &:first-child {
-      text-align: left;
-    }
-
-    @media only screen and (max-width: 581px) {
-      font-size: 4em;
-    }
-  }
-
-  .screen {
-    display: flex;
+  .loading-screen {
+    isolation: isolate;
     position: fixed;
-    left: 0;
     top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #222;
-    color: white;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #010101;
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    transition: all 500ms;
-    overflow: hidden;
-    z-index: 10000;
+    z-index: 30000;
+    scale: 1;
+
+    h2 {
+      color: white;
+    }
+
+    .anime-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: rotate(0deg) scale(1) translate(-50%, -50%);
+      isolation: isolate;
+      box-sizing: border-box;
+      overflow: hidden;
+      width: 20em;
+      transition: opacity 500ms, transform 500ms ease-in;
+      pointer-events: none;
+      user-select: none;
+      box-shadow: 0 0 2em black;
+    }
   }
 
-  .bar {
-    background: linear-gradient(to right, cyan, magenta, orange);
-    height: 0.25em;
-    width: 0px;
-    transition: width 100ms;
-  }
-
-  .bar-outer {
-    padding: 1px;
-    box-sizing: border-box;
-    margin: 0.5em 0;
-    background-color: #1a1a1a;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .fadeOut {
-    opacity: 0;
-    height: 0px;
-    top: 50vh;
+  @keyframes grow {
+    0% {
+      scale: 1;
+    }
+    100% {
+      scale: 1.2;
+    }
   }
 </style>
