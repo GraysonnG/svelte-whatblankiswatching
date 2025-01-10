@@ -22,10 +22,10 @@
       display: flex;
       overflow: auto;
       flex-direction: column;
-      border-bottom: 4px solid var(--anime-color);
       box-shadow: 0 0 2em var(--anime-color);
       outline: 2px solid var(--anime-color);
       outline-offset: 4px;
+      border-radius: 1em;
 
       @include viewport-small {
         aspect-ratio: unset;
@@ -34,11 +34,13 @@
       }
 
       .content {
+        background-color: #111;
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
         padding: 1em;
+        box-shadow: 0 0 1em #000;
 
         h2 {
           font-size: 2em;
@@ -69,65 +71,20 @@
         }
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 66%;
-        background: linear-gradient(transparent, black);
-        z-index: 1;
-
-        @include viewport-small {
-          height: 80%;
-          background: linear-gradient(transparent, black, black);
-        }
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 30%;
-        transform: rotate(180deg);
-        background-color: var(--anime-color);
-        -webkit-mask-image: url("../img/tone.png");
-        mask-image: url("../img/tone.png");
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        -webkit-mask-position-y: bottom;
-        mask-position: bottom;
-        -webkit-mask-repeat-y: no-repeat;
-        mask-repeat: repeat no-repeat;
-        z-index: 1;
-      }
-
       .close {
         position: absolute;
         top: 0;
         right: 0;
-        height: 5em;
+        height: 3em;
         aspect-ratio: 1/1;
         cursor: pointer;
+        background-color: #111;
+        border-bottom-left-radius: 50%;
+        display: grid;
+        place-items: center;
 
         > i {
           position: absolute;
-          top: 1.15em;
-          right: 1.20em;
-        }
-
-        &::after {
-          content: "";
-          position: absolute;
-          right: 0;
-          top: 0;
-          border-top: 2.5em solid black;
-          border-left: 2.5em solid transparent;
-          border-right: 2.5em solid black;
-          border-bottom: 2.5em solid transparent;
         }
       }
     }

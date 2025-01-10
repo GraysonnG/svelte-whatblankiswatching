@@ -30,9 +30,9 @@
 
   animeStore.subscribe(state => {
     if (state.modalAnime) {
-      document.body.style = "overflow: hidden;"
+      document.body.parentElement.style.overflow = "hidden;"
     } else {
-      document.body.style = ""
+      document.body.parentElement.style.overflow = ""
     }
   })
 

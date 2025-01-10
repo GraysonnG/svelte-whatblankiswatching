@@ -3,7 +3,7 @@
   import { AnilistAnime } from "../types/anilist";
   import { AnimeStore, animeStore } from "../store/animeStore";
   import Anime from "./Anime.svelte";
-  import { fade, scale } from "svelte/transition";
+  import { fade } from "svelte/transition";
 
   type RandomPos = {
     x: number;
@@ -96,7 +96,7 @@
     {:else}
       {#each animeList as anime, i}
         <div class="anime-card" style="z-index: {randomPos[i].time};transform: rotate({randomPos[i].rotation}deg) translate(-50%, -50%) scale({randomPos[i].scale * 2}); opacity: {randomPos[i].opacity}; top: {randomPos[i].y}%; left: {randomPos[i].x}%;">
-          <Anime data={anime} />
+          <Anime data={anime} titleVisible={i === arrSize - 1} />
         </div>
       {/each}
     {/if}

@@ -9,6 +9,7 @@
   const [send, _] = simpleCrossFade
 
   export let data: AnilistAnime;
+  export let titleVisible: boolean = true;
   let element;
   let visible = false;
   let imageLoaded = false;
@@ -45,7 +46,9 @@
   on:click={onSelect}
   bind:this={element}>
   {#if visible}
-    <h3>{data.title.english || data.title.romaji}</h3>
+    {#if titleVisible}
+       <h3>{data.title.english || data.title.romaji}</h3>
+    {/if}
     <!-- bg -->
     <div class="img-shadow">
       <div class="tone">
